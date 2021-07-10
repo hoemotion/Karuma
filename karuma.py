@@ -28,10 +28,10 @@ print(f"{Fore.GREEN}99%")
 time.sleep(1.1)
 print(f"{Fore.LIGHTBLUE_EX}长闩尺ㄩ爪闩 Bot booted")
 time.sleep(1)
+#little disclaimer
 
-
-token = getpass.getpass("Input Token(input is invisible)>>")
-async def Nuke():
+token = getpass.getpass("Input Token(input is invisible)>>") #getpass makes your input invisible
+async def Nuke(): #nuke part of the code
     print(f'{Fore.LIGHTYELLOW_EX}------')
     print('Nuke was selected')
     while True:
@@ -84,12 +84,12 @@ async def Nuke():
             raise SystemExit
 
 
-def exit():
+def exit(): # exit part of the code
   print(f"{Fore.WHITE}Thanks for using {Fore.YELLOW}长闩尺ㄩ爪闩\nthe script will automaticly close in 5 seconds")
   time.sleep(5)
   raise SystemExit
 
-async def raid():
+async def raid(): # raid part of the code
   print('Raid was selected')
   while True:
     try:
@@ -204,7 +204,7 @@ async def raid():
   raise SystemExit 
 
 @client.event
-async def on_ready():
+async def on_ready():# on ready event
   print(f'''
 {Fore.CYAN}██{Fore.WHITE}╗ {Fore.CYAN} ██{Fore.WHITE}╗ {Fore.CYAN}█████{Fore.WHITE}╗ {Fore.CYAN}██████{Fore.WHITE}╗ {Fore.CYAN}██{Fore.WHITE}╗   {Fore.CYAN}██{Fore.WHITE}╗{Fore.CYAN}███{Fore.WHITE}╗   {Fore.CYAN}███{Fore.WHITE}╗ {Fore.CYAN}█████{Fore.WHITE}╗
 {Fore.CYAN}██{Fore.WHITE}║ {Fore.CYAN}██{Fore.WHITE}╔╝{Fore.CYAN}██{Fore.WHITE}╔══{Fore.CYAN}██{Fore.WHITE}╗{Fore.CYAN}██{Fore.WHITE}╔══{Fore.CYAN}██{Fore.WHITE}╗{Fore.CYAN}██{Fore.WHITE}║   {Fore.CYAN}██{Fore.WHITE}║{Fore.CYAN}████{Fore.WHITE}╗ {Fore.CYAN}████{Fore.WHITE}║{Fore.CYAN}██{Fore.WHITE}╔══{Fore.CYAN}██{Fore.WHITE}╗
@@ -220,8 +220,8 @@ async def on_ready():
 [4] Exit the script
 
 ''')
-  nigga = input(f"{Fore.GREEN}Select>> ")
-  if nigga == '1':
+  selcet = input(f"{Fore.GREEN}Select>> ")
+  if select == '1':
    input2 = input(f"Mass Dm friends was selected\n{Fore.GREEN}What Should I Send?>> ")
    for user in client.user.friends:
        try:
@@ -234,11 +234,11 @@ async def on_ready():
    print(f"{Fore.WHITE}Thanks for using {Fore.YELLOW}长闩尺ㄩ爪闩\nthe script will automaticly close in 5 seconds")
    time.sleep(5)
    raise SystemExit
-  elif nigga == '2':
+  elif select == '2':
    await Nuke()
-  elif nigga == '4':
+  elif select == '4':
     await exit()
-  elif nigga == '3':
+  elif select == '3':
     await raid()
    
 
