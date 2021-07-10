@@ -15,12 +15,6 @@
 - Nuke Discord Servers (mass ban and mass kick are not included)
 - Raid Discord Servers
 
-**Content**
-
-[TOCM]
-
-[TOC]
-
 
 ### Gift me nitro:,)
 
