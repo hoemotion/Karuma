@@ -12,8 +12,9 @@
 ### Features
 
 - Mass DM friends
-- Nuke Discord Servers (mass ban and mass kick are not included)
-- Raid Discord Servers
+- Nuke Discord Servers (mass ban is included)
+- Raid Discord Servers (mass nickname is included)
+- if you change the bot = False to bot = True (last line of the code) the script will work for bot accounts
 
 
 ### Gift me nitro:,)
