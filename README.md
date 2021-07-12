@@ -7,7 +7,7 @@
 > Little preview of the selfbot
                 
 				
-![](https://img.shields.io/github/stars/pandao/editor.md.svg) ![](https://img.shields.io/badge/release-v1.0-blue) ![]()
+![](https://img.shields.io/github/stars/pandao/editor.md.svg) ![](https://img.shields.io/badge/release-v1.1-blue) ![]()
 
 ### Features
 
