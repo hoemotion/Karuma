@@ -4,7 +4,6 @@ import colorama
 import os
 from colorama import Fore
 import time
-import getpass
 import asyncio
 
 
