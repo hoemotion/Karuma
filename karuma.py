@@ -19,7 +19,7 @@ time.sleep(0.8)
 print("Use this tool only for educational purposes and at your own risk")
 time.sleep(0.8)
 print("Ask the server owner if you're allowed to use this tool")
-print(f'''{Fore.GREEN}Mass Dm {Fore.RESET}will only work with a {Fore.GREEN}Bot-Token{Fore.RESET} which has enabled{Fore.GREEN}member intents{Fore.RESET}.
+print(f'''{Fore.GREEN}Mass Dm {Fore.RESET}will only work with a {Fore.GREEN}Bot-Token{Fore.RESET} which has enabled{Fore.GREEN} member intents{Fore.RESET}.
 This does also count for {Fore.GREEN}Mass Ban{Fore.RESET} (in the Nuke part of the code) and {Fore.GREEN}Mass Nickname{Fore.RESET} (in the Raid part of the code).
 {Fore.GREEN}Mass Dm friends {Fore.RESET}will only work with a {Fore.GREEN}Human-Token.
 ''')
@@ -42,9 +42,9 @@ time.sleep(1)
 
 chupapi = input('Are you using a Bot-Token(enter yes or no)?>> ')
 if chupapi == "yes":
-    munanyo = "True"
+    munanyo = "BOT_TOKEN"
 elif chupapi == "no":
-    munanyo = "False"
+    munanyo = "HUMAN_TOKEN"
 else:
     print(f'{Fore.RED}Invalid option😅\nthe script will automaticly close in 5 seconds')
     time.sleep(5)
@@ -84,10 +84,6 @@ async def massdm():
                     await asyncio.sleep(0.1)
                 except Exception as e:
                     print(f"{Fore.RED}[-] Didn\'t send{Fore.WHITE} {send} {Fore.GREEN}to {Fore.YELLOW}{member} - {e}")
-        else:
-            print(f"{Fore.RED}Couldn\'t find a Server with the ID: {guild_id}\nthe script will automaticly close in 5 seconds")
-            time.sleep(5)
-            raise SystemExit
     print(f'{Fore.GREEN}⚡All tasks completed⚡')
     print(f"{Fore.WHITE}Thanks for using {Fore.YELLOW}长闩尺ㄩ爪闩\nthe script will automaticly close in 5 seconds")
     time.sleep(5)
@@ -145,10 +141,6 @@ async def Nuke():
                     await asyncio.sleep(0.1)
                 except Exception as e:
                     print(f"{Fore.RED}[-] [EMOJI NOT DELETED] {Fore.WHITE}{emoji.name}{Fore.RED} in '{guild.name}' - {e}")
-        else:
-            print(f"{Fore.RED}Couldn\'t find a Server with the ID: {server_id}\nthe script will automaticly close in 5 seconds")
-            time.sleep(5)
-            raise SystemExit
     print(f'{Fore.GREEN}⚡All tasks completed⚡')
     print(f"{Fore.WHITE}Thanks for using {Fore.YELLOW}长闩尺ㄩ爪闩\nthe script will automaticly close in 5 seconds")
     time.sleep(5)
@@ -373,10 +365,6 @@ async def raid():
                     await asyncio.sleep(0.1)
                 except Exception as e:
                     print(f"{Fore.RED}[-]Couldn\'t change {Fore.WHITE}{user}\'s{Fore.RED} nickname in {guild.name} to {Fore.WHITE}{newnick}{Fore.RED} - {e}")
-        else:
-            print(f"{Fore.RED}Couldn\'t find a Server with the ID: {server_id}\nthe script will automaticly close in 5 seconds")
-            time.sleep(5)
-            raise SystemExit
     print(f'{Fore.GREEN}⚡All tasks completed⚡')
     print(f"{Fore.WHITE}Thanks for using {Fore.YELLOW}长闩尺ㄩ爪闩\nthe script will automaticly close in 5 seconds")
     time.sleep(5)
@@ -437,6 +425,9 @@ async def on_ready():
         raise SystemExit
 
 
-client.run(token, bot=munanyo)
+if munanyo == "HUMAN_TOKEN":
+    client.run(token, bot=False)
+elif munanyo == "BOT_TOKEN":
+    client.run(token, bot=True)
 
 # the end
