@@ -20,4 +20,4 @@
 
 ### Gift me nitro:,)
 
-- Please donate me nitro if this selfbot helped you **karma.meme#8811**
+- Please donate me nitro if this selfbot helped you: **karma.meme#8811**
