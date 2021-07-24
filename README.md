@@ -3,11 +3,11 @@
 
 # Karuma
 
-![](https://cdn.discordapp.com/attachments/819202559789105182/863298058149953536/unknown.png)
+![](https://cdn.discordapp.com/attachments/858455563645485077/868556693947154482/unknown.png)
 > Little preview of the selfbot
                 
 				
-![](https://img.shields.io/github/stars/pandao/editor.md.svg) ![](https://img.shields.io/badge/release-v1.1-blue) ![]()
+![](https://img.shields.io/github/stars/pandao/editor.md.svg) ![](https://img.shields.io/badge/release-v1.3-blue) ![]()
 
 ### Features
 
