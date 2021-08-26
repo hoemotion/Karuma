@@ -1,3 +1,4 @@
+# hello there! don't forget to leave a star: https://github.com/hoemotion/Karuma/
 import time
 try:
     import discord
