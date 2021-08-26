@@ -18,6 +18,6 @@
 - Supports Human-Tokens and Bot-Tokens
 
 
-### Gift me nitro:,)
+### Don't forget to leave a Star!
 
-- Please donate me nitro if this selfbot helped you: **karma.meme#8811**
+- Please don't forget to leave a star (donate me nitro if you are rich enough: **karma.meme#8811**).
