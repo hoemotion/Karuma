@@ -2,14 +2,6 @@
 
 
 # Karuma
-
-![](https://cdn.discordapp.com/attachments/858455563645485077/880583663014797343/unknown.png)
-![](https://cdn.discordapp.com/attachments/858455563645485077/880584938217431040/unknown.png)
-> Little preview of the selfbot and the embed
-                
-				
-![](https://img.shields.io/github/stars/pandao/editor.md.svg) ![](https://img.shields.io/badge/release-v1.5-blue) ![]()
-
 ### Features
 
 - Mass DM Friends (Only available for Humans)
@@ -20,6 +12,12 @@
 - Mass Embed DM (Only available for Bots)
 - Supports Human-Tokens and Bot-Tokens
 
+![](https://cdn.discordapp.com/attachments/858455563645485077/880583663014797343/unknown.png)
+![](https://cdn.discordapp.com/attachments/858455563645485077/880584938217431040/unknown.png)
+> Little preview of the selfbot and the embed
+                
+				
+![](https://img.shields.io/github/stars/pandao/editor.md.svg) ![](https://img.shields.io/badge/release-v1.5-blue) ![]()
 
 ### Don't forget to leave a Star!
 
