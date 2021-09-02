@@ -16,7 +16,7 @@ except ImportError:
 import os
 from colorama import Fore, Style
 import asyncio
-# imports all the stuff you'll need
+# imports all the stuff you'll need..
 
 # enabling member intents:
 intents = discord.Intents().default()
