@@ -1,3 +1,0 @@
-- discord.py (pip install discord.py)
-- colorama (pip install colorama)
-- a program which can run python files (I recommend PyCharm and VisualStudioCode, https://repl.it/ also works fine)
