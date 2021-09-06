@@ -14,10 +14,11 @@ except ImportError:
     time.sleep(5)
     raise SystemExit
 import os
-from colorama import Fore, Style
+from colorama import Fore, Style, init
 import asyncio
 # imports all the stuff you'll need..
-
+init()
+#this is required for some windows users
 # enabling member intents:
 intents = discord.Intents().default()
 intents.members = True
