@@ -27,6 +27,6 @@
 
 ## Having Issues?
 - This is my support Server:
-- 
+ 
 <a href = "https://discord.gg/mARrnX9"><img src="https://img.icons8.com/color/48/000000/discord.png"/></a>
 
