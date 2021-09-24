@@ -1,5 +1,5 @@
-# hello there! don't forget to leave a star: https://github.com/hoemotion/Karuma/
 import time
+from os import system, name
 try:
     import discord
 except ImportError:
@@ -16,7 +16,7 @@ except ImportError:
 import os
 from colorama import Fore, Style, init
 import asyncio
-# imports all the stuff you'll need..
+# imports all the stuff you'll need
 init()
 #this is required for some windows users
 # enabling member intents:
@@ -32,7 +32,7 @@ time.sleep(0.8)
 print("Use this tool only for educational purposes and at your own risk")
 time.sleep(0.8)
 print("Ask the server owner if you're allowed to use this tool")
-print(f'''{Fore.LIGHTGREEN_EX}{Style.BRIGHT}Mass Dm {Style.RESET_ALL}{Fore.RESET}will only work with a {Fore.LIGHTGREEN_EX}{Style.BRIGHT}Bot-Token{Style.RESET_ALL}{Fore.RESET} which has enabled{Style.BRIGHT}{Fore.GREEN} member intents{Style.RESET_ALL}{Fore.RESET}.
+print(f'''{Fore.LIGHTGREEN_EX}{Style.BRIGHT}Mass Dm {Style.RESET_ALL}{Fore.RESET}will only work with a {Fore.LIGHTGREEN_EX}{Style.BRIGHT}Bot-Token{Style.RESET_ALL}{Fore.RESET} which has enabled{Style.BRIGHT}{Fore.LIGHTGREEN_EX} member intents{Style.RESET_ALL}{Fore.RESET}.
 This does also count for {Style.BRIGHT}{Fore.LIGHTGREEN_EX}Mass Ban{Fore.RESET}{Style.RESET_ALL} (in the Nuke part of the code) and {Fore.LIGHTGREEN_EX}{Style.BRIGHT}Mass Nickname{Style.RESET_ALL}{Fore.RESET} (in the Raid part of the code).
 {Fore.LIGHTGREEN_EX}{Style.BRIGHT}Mass Dm friends {Style.RESET_ALL}{Fore.RESET}will only work with a {Style.BRIGHT}{Fore.LIGHTGREEN_EX}Human-Token{Style.RESET_ALL}.
 ''')
@@ -76,8 +76,9 @@ async def main():
     async def massdm():
         print(f'{Fore.LIGHTYELLOW_EX}------')
         if chupapi == "no":
-            print(
+            input(
                 f"{Fore.RED}Mass Dm doesn\'t work with a Human-Token\nPress Enter to return to the main menu")
+            os.system('cls' if os.name == 'nt' else 'clear')
             await main()
         else:
             pass
@@ -95,15 +96,18 @@ async def main():
                 print('Discord server "{}" was selected as a target...'.format(guild.name))
                 print('------')
                 ahegao = input(f"{Fore.GREEN}What Should I Send?>>  ")
+                membercount = len(guild.members)
+                index = 0
                 for member in guild.members:
+                    index += 1
                     try:
                         await member.send(ahegao)
                         print(
-                            f"{Fore.LIGHTGREEN_EX}[✅] Sent{Fore.WHITE} {ahegao} {Fore.LIGHTGREEN_EX}to {Fore.YELLOW}{member}")
+                            f"{Fore.LIGHTGREEN_EX}[✅] {index}/{membercount} Sent{Fore.WHITE} {ahegao} {Fore.LIGHTGREEN_EX}to {Fore.YELLOW}{member}")
                         await asyncio.sleep(0.1)
                     except Exception as e:
                         print(
-                            f"{Fore.RED}[❌] Didn\'t send{Fore.WHITE} {ahegao} {Fore.RED}to {Fore.YELLOW}{member}{Fore.RED} - {e}")
+                            f"{Fore.RED}[❌] {index}/{membercount} Didn\'t send{Fore.WHITE} {ahegao} {Fore.RED}to {Fore.YELLOW}{member}{Fore.RED} - {e}")
         print(f'{Fore.LIGHTGREEN_EX}⚡All tasks completed⚡')
         input(f"\n{Fore.WHITE}Thanks for using {Fore.YELLOW}长闩尺ㄩ爪闩\nPress Enter to return to the main menu")
         await main()
@@ -111,8 +115,9 @@ async def main():
     async def embedmassdmfriends():
         print(f'{Fore.LIGHTYELLOW_EX}------')
         if chupapi == "yes":
-            print(
+            input(
                 f"{Fore.RED}Embed Mass Dm friends doesn\'t work with a Bot-Token\nPress Enter to return to the main menu")
+            os.system('cls' if os.name == 'nt' else 'clear')
             await main()
         else:
             pass
@@ -142,16 +147,20 @@ async def main():
         karma.set_image(url=f"{img}")
         karma.set_footer(text=f"{footer}", icon_url=f"{footer_icon}")
         karma.set_author(name=f"{author}", icon_url=f"{icn}")
+        friendcounter = len(client.user.friends)
+        index = 0
         for user in client.user.friends:
+            index += 1
             try:
                 await user.send(embed=karma)
-                print(f"{Fore.LIGHTGREEN_EX}[✅] Sent{Fore.WHITE} the embed {Fore.LIGHTGREEN_EX}to {Fore.YELLOW}{user}")
+                print(f"{Fore.LIGHTGREEN_EX}[✅] {index}/{friendcounter} Sent{Fore.WHITE} the embed {Fore.LIGHTGREEN_EX}to {Fore.YELLOW}{user}")
                 await asyncio.sleep(0.1)
             except Exception as e:
                 print(
-                    f"{Fore.RED}[❌] Didn\'t send{Fore.WHITE} the embed {Fore.RED}to {Fore.YELLOW}{user}{Fore.RED} - {e}")
+                    f"{Fore.RED}[❌] {index}/{friendcounter} Didn\'t send{Fore.WHITE} the embed {Fore.RED}to {Fore.YELLOW}{user}{Fore.RED} - {e}")
         print(f'{Fore.LIGHTGREEN_EX}⚡All tasks completed⚡')
         input(f"\n{Fore.WHITE}Thanks for using {Fore.YELLOW}长闩尺ㄩ爪闩\nPress Enter to return to the main menu")
+        os.system('cls' if os.name == 'nt' else 'clear')
         await main()
     # embed mass dm part of the code:
     async def embedmassdm():
@@ -201,17 +210,21 @@ async def main():
                 kamehameha.set_image(url=f"{incest}")
                 kamehameha.set_footer(text=f"{knockknockknock}", icon_url=f"{fbi}")
                 kamehameha.set_author(name=f"{opn}", icon_url=f"{up}")
+                membercount = len(guild.members)
+                index = 0
                 for member in guild.members:
+                    index += 1
                     try:
                         await member.send(embed=kamehameha)
                         print(
-                            f"{Fore.LIGHTGREEN_EX}[✅] Sent{Fore.WHITE} the embed {Fore.LIGHTGREEN_EX}to {Fore.YELLOW}{member}")
+                            f"{Fore.LIGHTGREEN_EX}[✅] {index}/{membercount} Sent{Fore.WHITE} the embed {Fore.LIGHTGREEN_EX}to {Fore.YELLOW}{member}")
                         await asyncio.sleep(0.1)
                     except Exception as e:
                         print(
-                            f"{Fore.RED}[❌] Didn\'t send{Fore.WHITE} the embed {Fore.RED}to {Fore.YELLOW}{member}{Fore.RED} - {e}")
+                            f"{Fore.RED}[❌] {index}/{membercount} Didn\'t send{Fore.WHITE} the embed {Fore.RED}to {Fore.YELLOW}{member}{Fore.RED} - {e}")
         print(f'{Fore.LIGHTGREEN_EX}⚡All tasks completed⚡')
         input(f"\n{Fore.WHITE}Thanks for using {Fore.YELLOW}长闩尺ㄩ爪闩\nPress Enter to return to the main menu")
+        os.system('cls' if os.name == 'nt' else 'clear')
         await main()
     # nuke part of the code:
     async def Nuke():
@@ -237,11 +250,22 @@ async def main():
                 ban_reason = input('Enter ban reason: ')
                 print('------')
                 index = 0
+                guildinvites = len(await guild.invites())
+                for invite in await guild.invites():
+                    index += 1
+                    try:
+                        await invite.delete()
+                        print(
+                            f"{Fore.LIGHTGREEN_EX}[✅] {index}/{guildinvites} [INVITE DELETED] {Fore.WHITE}{invite}{Fore.LIGHTGREEN_EX} in '{guild.name}'")
+                    except Exception as e:
+                        print(
+                            f"{Fore.RED}[❌]  {index}/{guildinvites} [INVITE NOT DELETED] {Fore.WHITE}{invite}{Fore.RED} in '{guild.name}' - {e}")
+                index = 0
                 guildchannels = len(guild.channels)
                 for channel in guild.channels:
+                    index += 1
                     try:
                         await channel.delete()
-                        index += 1
                         print(
                             f"{Fore.LIGHTGREEN_EX}[✅] {index}/{guildchannels} [CHANNEL DELETED] {Fore.WHITE}{channel.name}{Fore.LIGHTGREEN_EX} in '{guild.name}'")
                         await asyncio.sleep(0.1)
@@ -251,8 +275,8 @@ async def main():
                 index = 0
                 guildroles = len(guild.roles)
                 for role in guild.roles:
+                    index += 1
                     try:
-                        index += 1
                         await role.delete()
                         print(
                             f"{Fore.LIGHTGREEN_EX}[✅] {index}/{guildroles} [ROLE DELETED] {Fore.WHITE}{role.name}{Fore.LIGHTGREEN_EX} in '{guild.name}'")
@@ -263,8 +287,8 @@ async def main():
                 index = 0
                 guildmembers = len(guild.members)
                 for member in guild.members:
+                    index += 1
                     try:
-                        index += 1
                         await guild.ban(member, reason=ban_reason, delete_message_days=7)
                         print(
                             f"{Fore.LIGHTGREEN_EX}[✅] {index}/{guildmembers} [BANNED] {Fore.WHITE}{member}{Fore.LIGHTGREEN_EX} (ID: {member.id}) in '{guild.name}'")
@@ -275,9 +299,9 @@ async def main():
                 index = 0
                 guildemojis = len(guild.emojis)
                 for emoji in guild.emojis:
+                    index += 1
                     print(emoji)
                     try:
-                        index += 1
                         await emoji.delete()
                         print(
                             f"{Fore.LIGHTGREEN_EX}[✅] {index}/{guildemojis} [EMOJI DELETED] {Fore.WHITE}{emoji.name}{Fore.LIGHTGREEN_EX} in '{guild.name}'")
@@ -285,20 +309,19 @@ async def main():
                     except Exception as e:
                         print(
                             f"{Fore.RED}[❌] {index}/{guildemojis} [EMOJI NOT DELETED] {Fore.WHITE}{emoji.name}{Fore.RED} in '{guild.name}' - {e}")
-                index = 0
-                guildinvites = len(guild.invites)
-                for invite in guild.invites:
-                    try:
-                        index += 1
-                        await invite.delete()
-                        print(
-                            f"{Fore.LIGHTGREEN_EX}[✅] {index}/{guildinvites} [INVITE DELETED] {Fore.WHITE}{invite}{Fore.LIGHTGREEN_EX} in '{guild.name}'")
-                        await asyncio.sleep(0.1)
-                    except Exception as e:
-                        print(
-                            f"{Fore.RED}[❌]  {index}/{guildinvites} [INVITE NOT DELETED] {Fore.WHITE}{invite}{Fore.RED} in '{guild.name}' - {e}")
         print(f'{Fore.LIGHTGREEN_EX}⚡All tasks completed⚡')
         input(f"\n{Fore.WHITE}Thanks for using {Fore.YELLOW}长闩尺ㄩ爪闩\nPress Enter to return to the main menu")
+        os.system('cls' if os.name == 'nt' else 'clear')
+        await main()
+    # server id displayer:
+    async def server_id_displayer():
+        index = 0
+        for guild in client.guilds:
+            index +=1
+            print(f"{Fore.LIGHTGREEN_EX}[{index}/{len(client.guilds)}] {Fore.YELLOW}{guild.name}{Fore.LIGHTGREEN_EX} - {Fore.YELLOW}{guild.id}{Fore.LIGHTGREEN_EX} | Total members: {Fore.YELLOW}{len (guild.members)}")
+        print(f'{Fore.LIGHTGREEN_EX}⚡All tasks completed⚡')
+        input(f"\n{Fore.WHITE}Thanks for using {Fore.YELLOW}长闩尺ㄩ爪闩\nPress Enter to return to the main menu")
+        os.system('cls' if os.name == 'nt' else 'clear')
         await main()
     # exit part of the code:
     def exit():
@@ -331,228 +354,298 @@ async def main():
                 newnick = input(f"{Fore.LIGHTGREEN_EX}Please enter a kind nickname for all the members>> ")
                 await guild.edit(name=servername)
                 print(f"[✅]Renamed the guild to: {Fore.WHITE}{servername}")
+                index = 0
                 await guild.create_text_channel(text_channel)
+                index += 1
                 print(
-                    f"{Fore.LIGHTGREEN_EX}[✅]Created a text channel:{Fore.WHITE} {text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
-                await asyncio.sleep(0.1)
-                await guild.create_text_channel(text_channel)
-                print(
-                    f"{Fore.LIGHTGREEN_EX}[✅]Created a text channel:{Fore.WHITE} {text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                    f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a text channel:{Fore.WHITE} {text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_text_channel(text_channel)
+                index += 1
                 print(
-                    f"{Fore.LIGHTGREEN_EX}[✅]Created a text channel:{Fore.WHITE} {text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                    f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a text channel:{Fore.WHITE} {text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_text_channel(text_channel)
+                index += 1
                 print(
-                    f"{Fore.LIGHTGREEN_EX}[✅]Created a text channel:{Fore.WHITE} {text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                    f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a text channel:{Fore.WHITE} {text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_text_channel(text_channel)
+                index += 1
                 print(
-                    f"{Fore.LIGHTGREEN_EX}[✅]Created a text channel:{Fore.WHITE} {text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                    f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a text channel:{Fore.WHITE} {text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_text_channel(text_channel)
+                index += 1
                 print(
-                    f"{Fore.LIGHTGREEN_EX}[✅]Created a text channel:{Fore.WHITE} {text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                    f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a text channel:{Fore.WHITE} {text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_text_channel(text_channel)
+                index += 1
                 print(
-                    f"{Fore.LIGHTGREEN_EX}[✅]Created a text channel:{Fore.WHITE} {text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                    f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a text channel:{Fore.WHITE} {text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_text_channel(text_channel)
+                index += 1
                 print(
-                    f"{Fore.LIGHTGREEN_EX}[✅]Created a text channel:{Fore.WHITE} {text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                    f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a text channel:{Fore.WHITE} {text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_text_channel(text_channel)
+                index += 1
                 print(
-                    f"{Fore.LIGHTGREEN_EX}[✅]Created a text channel:{Fore.WHITE} {text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                    f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a text channel:{Fore.WHITE} {text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_text_channel(text_channel)
+                index += 1
                 print(
-                    f"{Fore.LIGHTGREEN_EX}[✅]Created a text channel:{Fore.WHITE} {text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                    f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a text channel:{Fore.WHITE} {text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_text_channel(text_channel)
+                index += 1
                 print(
-                    f"{Fore.LIGHTGREEN_EX}[✅]Created a text channel:{Fore.WHITE} {text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                    f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a text channel:{Fore.WHITE} {text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_text_channel(text_channel)
+                index += 1
                 print(
-                    f"{Fore.LIGHTGREEN_EX}[✅]Created a text channel:{Fore.WHITE} {text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                    f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a text channel:{Fore.WHITE} {text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_text_channel(text_channel)
+                index += 1
                 print(
-                    f"{Fore.LIGHTGREEN_EX}[✅]Created a text channel:{Fore.WHITE} {text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                    f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a text channel:{Fore.WHITE} {text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_text_channel(text_channel)
+                index += 1
                 print(
-                    f"{Fore.LIGHTGREEN_EX}[✅]Created a text channel:{Fore.WHITE} {text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                    f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a text channel:{Fore.WHITE} {text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_text_channel(text_channel)
+                index += 1
                 print(
-                    f"{Fore.LIGHTGREEN_EX}[✅]Created a text channel:{Fore.WHITE} {text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                    f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a text channel:{Fore.WHITE} {text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_text_channel(text_channel)
+                index += 1
                 print(
-                    f"{Fore.LIGHTGREEN_EX}[✅]Created a text channel:{Fore.WHITE} {text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                    f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a text channel:{Fore.WHITE} {text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_text_channel(text_channel)
+                index += 1
                 print(
-                    f"{Fore.LIGHTGREEN_EX}[✅]Created a text channel:{Fore.WHITE} {text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                    f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a text channel:{Fore.WHITE} {text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_text_channel(text_channel)
+                index += 1
                 print(
-                    f"{Fore.LIGHTGREEN_EX}[✅]Created a text channel:{Fore.WHITE} {text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                    f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a text channel:{Fore.WHITE} {text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_text_channel(text_channel)
+                index += 1
                 print(
-                    f"{Fore.LIGHTGREEN_EX}[✅]Created a text channel:{Fore.WHITE} {text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                    f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a text channel:{Fore.WHITE} {text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_text_channel(text_channel)
+                index += 1
                 print(
-                    f"{Fore.LIGHTGREEN_EX}[✅]Created a text channel:{Fore.WHITE} {text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                    f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a text channel:{Fore.WHITE} {text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_text_channel(text_channel)
+                index += 1
                 print(
-                    f"{Fore.LIGHTGREEN_EX}[✅]Created a text channel: {Fore.WHITE}{text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                    f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a text channel:{Fore.WHITE} {text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_text_channel(text_channel)
+                index += 1
                 print(
-                    f"{Fore.LIGHTGREEN_EX}[✅]Created a text channel: {Fore.WHITE}{text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                    f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a text channel: {Fore.WHITE}{text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_text_channel(text_channel)
+                index += 1
                 print(
-                    f"{Fore.LIGHTGREEN_EX}[✅]Created a text channel: {Fore.WHITE}{text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                    f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a text channel: {Fore.WHITE}{text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_text_channel(text_channel)
+                index += 1
                 print(
-                    f"{Fore.LIGHTGREEN_EX}[✅]Created a text channel: {Fore.WHITE}{text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                    f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a text channel: {Fore.WHITE}{text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_text_channel(text_channel)
+                index += 1
                 print(
-                    f"{Fore.LIGHTGREEN_EX}[✅]Created a text channel: {Fore.WHITE}{text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                    f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a text channel: {Fore.WHITE}{text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_text_channel(text_channel)
+                index += 1
                 print(
-                    f"{Fore.LIGHTGREEN_EX}[✅]Created a text channel: {Fore.WHITE}{text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                    f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a text channel: {Fore.WHITE}{text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_text_channel(text_channel)
+                index += 1
                 print(
-                    f"{Fore.LIGHTGREEN_EX}[✅]Created a text channel: {Fore.WHITE}{text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                    f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a text channel: {Fore.WHITE}{text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_text_channel(text_channel)
+                index += 1
                 print(
-                    f"{Fore.LIGHTGREEN_EX}[✅]Created a text channel: {Fore.WHITE}{text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                    f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a text channel: {Fore.WHITE}{text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_text_channel(text_channel)
+                index += 1
                 print(
-                    f"{Fore.LIGHTGREEN_EX}[✅]Created a text channel: {Fore.WHITE}{text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                    f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a text channel: {Fore.WHITE}{text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_text_channel(text_channel)
+                index += 1
                 print(
-                    f"{Fore.LIGHTGREEN_EX}[✅]Created a text channel: {Fore.WHITE}{text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                    f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a text channel: {Fore.WHITE}{text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                await asyncio.sleep(0.1)
+                await guild.create_text_channel(text_channel)
+                index += 1
+                print(
+                    f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a text channel: {Fore.WHITE}{text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_role(name=role)
-                print(f"{Fore.LIGHTGREEN_EX}[✅]Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                index = 0
+                index += 1
+                print(f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_role(name=role)
-                print(f"{Fore.LIGHTGREEN_EX}[✅]Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                index += 1
+                print(f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_role(name=role)
-                print(f"{Fore.LIGHTGREEN_EX}[✅]Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                index += 1
+                print(f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_role(name=role)
-                print(f"{Fore.LIGHTGREEN_EX}[✅]Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                index += 1
+                print(f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_role(name=role)
-                print(f"{Fore.LIGHTGREEN_EX}[✅]Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                index += 1
+                print(f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_role(name=role)
-                print(f"{Fore.LIGHTGREEN_EX}[✅]Created a role: {Fore.WHITE}{role} {Fore.LIGHTGREEN_EX}in {guild.name}")
+                index += 1
+                print(f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a role: {Fore.WHITE}{role} {Fore.LIGHTGREEN_EX}in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_role(name=role)
-                print(f"{Fore.LIGHTGREEN_EX}[✅]Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                index += 1
+                print(f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_role(name=role)
-                print(f"{Fore.LIGHTGREEN_EX}[✅]Created a role: {Fore.WHITE}{role} {Fore.LIGHTGREEN_EX}in {guild.name}")
+                index += 1
+                print(f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a role: {Fore.WHITE}{role} {Fore.LIGHTGREEN_EX}in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_role(name=role)
-                print(f"{Fore.LIGHTGREEN_EX}[✅]Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                index += 1
+                print(f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_role(name=role)
-                print(f"{Fore.LIGHTGREEN_EX}[✅]Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                index += 1
+                print(f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_role(name=role)
-                print(f"{Fore.LIGHTGREEN_EX}[✅]Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                index += 1
+                print(f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_role(name=role)
-                print(f"{Fore.LIGHTGREEN_EX}[✅]Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                index += 1
+                print(f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_role(name=role)
-                print(f"{Fore.LIGHTGREEN_EX}[✅]Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                index += 1
+                print(f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_role(name=role)
-                print(f"{Fore.LIGHTGREEN_EX}[✅]Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                index += 1
+                print(f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_role(name=role)
-                print(f"{Fore.LIGHTGREEN_EX}[✅]Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                index += 1
+                print(f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_role(name=role)
-                print(f"{Fore.LIGHTGREEN_EX}[✅]Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                index += 1
+                print(f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_role(name=role)
-                print(f"{Fore.LIGHTGREEN_EX}[✅]Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                index += 1
+                print(f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_role(name=role)
-                print(f"{Fore.LIGHTGREEN_EX}[✅]Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                index += 1
+                print(f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_role(name=role)
-                print(f"{Fore.LIGHTGREEN_EX}[✅]Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                index += 1
+                print(f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_role(name=role)
-                print(f"{Fore.LIGHTGREEN_EX}[✅]Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                index += 1
+                print(f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_role(name=role)
-                print(f"{Fore.LIGHTGREEN_EX}[✅]Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                index += 1
+                print(f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_role(name=role)
-                print(f"{Fore.LIGHTGREEN_EX}[✅]Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                index += 1
+                print(f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_role(name=role)
-                print(f"{Fore.LIGHTGREEN_EX}[✅]Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                index += 1
+                print(f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_role(name=role)
-                print(f"{Fore.LIGHTGREEN_EX}[✅]Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                index += 1
+                print(f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_role(name=role)
-                print(f"{Fore.LIGHTGREEN_EX}[✅]Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                index += 1
+                print(f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_role(name=role)
-                print(f"{Fore.LIGHTGREEN_EX}[✅]Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                index += 1
+                print(f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_role(name=role)
-                print(f"{Fore.LIGHTGREEN_EX}[✅]Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                index += 1
+                print(f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_role(name=role)
-                print(f"{Fore.LIGHTGREEN_EX}[✅]Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                index += 1
+                print(f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_role(name=role)
-                print(f"{Fore.LIGHTGREEN_EX}[✅]Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                index += 1
+                print(f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
                 await guild.create_role(name=role)
-                print(f"{Fore.LIGHTGREEN_EX}[✅]Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                index += 1
+                print(f"{Fore.LIGHTGREEN_EX}[✅] {index}/30 Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
                 await asyncio.sleep(0.1)
+                index = 0
+                usercount = len(guild.members)
                 for user in guild.members:
+                    index += 1
                     try:
                         await user.edit(nick=newnick)
                         print(
-                            f"{Fore.LIGHTGREEN_EX}[✅]Changed {Fore.WHITE}{user}\'s {Fore.LIGHTGREEN_EX}nickname in {guild.name} to: {Fore.WHITE}{newnick}")
+                            f"{Fore.LIGHTGREEN_EX}[✅] {index}/{usercount} Changed {Fore.WHITE}{user}\'s {Fore.LIGHTGREEN_EX}nickname in {guild.name} to: {Fore.WHITE}{newnick}")
                         await asyncio.sleep(0.1)
                     except Exception as e:
                         print(
-                            f"{Fore.RED}[❌]Couldn\'t change {Fore.WHITE}{user}\'s{Fore.RED} nickname in {guild.name} to {Fore.WHITE}{newnick}{Fore.RED} - {e}")
+                            f"{Fore.RED}[❌] {index}/{usercount} Couldn\'t change {Fore.WHITE}{user}\'s{Fore.RED} nickname in {guild.name} to {Fore.WHITE}{newnick}{Fore.RED} - {e}")
         print(f'{Fore.LIGHTGREEN_EX}⚡All tasks completed⚡')
         input(f"\n{Fore.WHITE}Thanks for using {Fore.YELLOW}长闩尺ㄩ爪闩\nPress Enter to return to the main menu")
+        os.system('cls' if os.name == 'nt' else 'clear')
         await main()
+    if munanyo == "HUMAN_TOKEN":
+        Connected = f"Guild Counter: {len(client.guilds)} | User Counter: {len(client.users)} | Friend Counter {len(client.user.friends)}"
+    else:
+        Connected = f"Guild Counter: {len(client.guilds)} | User Counter: {len(client.users)}"
     print(f'''
 {Fore.BLUE}██{Fore.WHITE}╗ {Fore.BLUE} ██{Fore.WHITE}╗ {Fore.BLUE}█████{Fore.WHITE}╗ {Fore.BLUE}██████{Fore.WHITE}╗ {Fore.BLUE}██{Fore.WHITE}╗   {Fore.BLUE}██{Fore.WHITE}╗{Fore.BLUE}███{Fore.WHITE}╗   {Fore.BLUE}███{Fore.WHITE}╗ {Fore.BLUE}█████{Fore.WHITE}╗
 {Fore.BLUE}██{Fore.WHITE}║ {Fore.BLUE}██{Fore.WHITE}╔╝{Fore.BLUE}██{Fore.WHITE}╔══{Fore.BLUE}██{Fore.WHITE}╗{Fore.BLUE}██{Fore.WHITE}╔══{Fore.BLUE}██{Fore.WHITE}╗{Fore.BLUE}██{Fore.WHITE}║   {Fore.BLUE}██{Fore.WHITE}║{Fore.BLUE}████{Fore.WHITE}╗ {Fore.BLUE}████{Fore.WHITE}║{Fore.BLUE}██{Fore.WHITE}╔══{Fore.BLUE}██{Fore.WHITE}╗
@@ -563,33 +656,39 @@ async def main():
 {Fore.WHITE}                                   Made by {Fore.YELLOW}hoemotion 
 {Fore.WHITE}Check out the github page for updates: {Fore.LIGHTBLUE_EX}https://github.com/hoemotion/Karuma/           
 {Fore.LIGHTGREEN_EX}Logged in as {Fore.YELLOW}"{client.user}" {Fore.LIGHTGREEN_EX}(ID:{Fore.YELLOW} {client.user.id}{Fore.LIGHTGREEN_EX})
-[1] Mass Dm friends | [2] Mass Embed Dm friends | [3] Nuke
-[4] Raid            | [5] Mass Dm               | [6] Mass Embed Dm
-[7] Exit Script
+{Connected}
+[1] Mass Dm friends     | [2] Mass Embed Dm friends | [3] Nuke
+[4] Raid                | [5] Mass Dm               | [6] Mass Embed Dm
+[7] Display all Servers | [8] Exit Script
 ''')
     select = input(f"{Fore.LIGHTGREEN_EX}Select>> ")
     if select == '1': # mass dm friends part of the code:
         print(f'{Fore.LIGHTYELLOW_EX}------')
         if chupapi == "yes":
-            print("Mass Dm friends does only work with a Human-Token\nPress Enter to return to the main menu")
+            input("Mass Dm friends does only work with a Human-Token\nPress Enter to return to the main menu")
+            os.system('cls' if os.name == 'nt' else 'clear')
             await main()
         else:
             pass
         overflow = input(f"Mass Dm friends was selected\n{Fore.LIGHTGREEN_EX}What Should I Send?>> ")
         print(f'{Fore.LIGHTYELLOW_EX}------')
+        friendcounter = len(client.user.friends)
+        index = 0
         for user in client.user.friends:
+            index += 1
             try:
                 await user.send(f"{overflow}")
-                print(f"{Fore.LIGHTGREEN_EX}[✅] Sent{Fore.WHITE} {overflow} {Fore.LIGHTGREEN_EX}to {Fore.YELLOW}{user}")
+                print(f"{Fore.LIGHTGREEN_EX}[✅] {index}/{friendcounter} Sent{Fore.WHITE} {overflow} {Fore.LIGHTGREEN_EX}to {Fore.YELLOW}{user}")
                 await asyncio.sleep(0.1)
             except Exception as e:
-                print(f"{Fore.RED}[❌] Didn\'t send{Fore.WHITE} {overflow} {Fore.RED}to {Fore.YELLOW}{user}{Fore.RED} - {e}")
+                print(f"{Fore.RED}[❌] {index}/{friendcounter} Didn\'t send{Fore.WHITE} {overflow} {Fore.RED}to {Fore.YELLOW}{user}{Fore.RED} - {e}")
         print(f'{Fore.LIGHTGREEN_EX}⚡All tasks completed⚡')
         input(f"\n{Fore.WHITE}Thanks for using {Fore.YELLOW}长闩尺ㄩ爪闩\nPress Enter to return to the main menu")
+        os.system('cls' if os.name == 'nt' else 'clear')
         await main()
     elif select == '3':
         await Nuke() # runs the nuke part of the code
-    elif select == '7':
+    elif select == '8':
         await exit() # runs the exit part of the code
     elif select == '4':
         await raid() # runs the raid part of the code
@@ -599,14 +698,21 @@ async def main():
         await embedmassdm() # runs the embed mass dm part of the code
     elif select == '2':
         await embedmassdmfriends() # runs the embed mass dm friends part of the code
+    elif select == '7':
+        await server_id_displayer() # runs the embed mass dm part of the code
     else:
-        print("Invalid option😅\nPress Enter to return to the main menu")
+        input(f"{Fore.RED}Invalid option😅\nPress Enter to return to the main menu")
+        os.system('cls' if os.name == 'nt' else 'clear')
         await main()
 
 # on ready event:
-@client.event
-async def on_ready():
-    await main()
+def start():
+    @client.event
+    async def on_ready():
+        os.system('cls' if os.name == 'nt' else 'clear')
+        await main()
+
+start()
 
 if munanyo == "HUMAN_TOKEN":
     client.run(token, bot=False) # runs the human-token if human-token was selected
