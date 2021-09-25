@@ -168,6 +168,7 @@ async def main():
         if chupapi == "no":
             input(
                 f"{Fore.RED}Embed Mass Dm doesn\'t work with a Human-Token\nPress Enter to return to the main menu")
+            os.system('cls' if os.name == 'nt' else 'clear')
             await main()
         else:
             pass
