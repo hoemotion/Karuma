@@ -23,7 +23,7 @@
 
 ### Don't forget to leave a Star!
 
-- Please don't forget to leave a star (donate me nitro if you are rich enough: **karma.meme#8811**).
+- Please don't forget to leave a star ⭐️.
 
 ## Having Issues?
 - This is my Support-Server:
