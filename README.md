@@ -8,7 +8,7 @@
 > Little preview of the selfbot and the embed
                 
 				
-![](https://img.shields.io/github/stars/pandao/editor.md.svg) ![](https://img.shields.io/badge/release-v1.6-blue) ![]()
+![](https://img.shields.io/github/stars/pandao/editor.md.svg) ![](https://img.shields.io/badge/release-v1.7-blue) ![]()
 
 
 ### Features
@@ -26,7 +26,9 @@
 - Please don't forget to leave a star (donate me nitro if you are rich enough: **karma.meme#8811**).
 
 ## Having Issues?
-- This is my support Server:
+- This is my Support-Server:
  
 <a href = "https://discord.gg/NsRSaQNbYa"><img src="https://img.icons8.com/color/48/000000/discord.png"/></a>
+
+## Pllease use this tool for educational purposes only
 
