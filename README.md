@@ -30,5 +30,5 @@
  
 <a href = "https://discord.gg/NsRSaQNbYa"><img src="https://img.icons8.com/color/48/000000/discord.png"/></a>
 
-## Pllease use this tool for educational purposes only
+## Please use this tool for educational purposes only
 
