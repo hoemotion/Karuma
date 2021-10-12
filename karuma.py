@@ -1,23 +1,28 @@
 import time
 from os import system, name
 import sys
+import os
 sys.tracebacklimit = 0
+import subprocess
 try:
     import discord
 except ImportError:
-    print('Discord.py is not installed! Install it via "pip install discord.py" in the terminal\nthe script will automatically close in 5 seconds')
-    time.sleep(5)
-    raise SystemExit
+    subprocess.check_call([sys.executable, "-m", "pip", "install", 'discord.py'])
+import discord
 from discord.ext import commands
+import json
 try:
-   import colorama
+    import colorama
 except ImportError:
-    print('Colorama is not installed! Install it via "pip install colorama" in the terminal\nthe script will automatically close in 5 seconds')
-    time.sleep(5)
-    raise SystemExit
-import os
-from colorama import Fore, Style, init
+    subprocess.check_call([sys.executable, "-m", "pip", "install", 'colorama'])
+from colorama import Fore, init, Style
+from datetime import datetime
 import asyncio
+import time
+try:
+    import pyfade
+except ImportError:
+    subprocess.check_call([sys.executable, "-m", "pip", "install", 'pyfade'])
 # imports all the stuff you'll need
 init()
 #this is required for some windows users
@@ -27,21 +32,21 @@ intents.members = True
 client = discord.Client(intents=intents)
 
 # disclaimer:
-print(f"{Style.BRIGHT}DISCLAIMER:")
+print(f"{Fore.LIGHTWHITE_EX}{Style.BRIGHT}DISCLAIMER:")
 time.sleep(0.5)
-print(f"{Style.RESET_ALL}User automation and spamming are {Fore.LIGHTYELLOW_EX}{Style.BRIGHT}against Discord's TOS!!{Style.RESET_ALL}{Fore.RESET}")
+print(f"{Style.RESET_ALL}{Fore.LIGHTWHITE_EX}User automation and spamming are {Fore.LIGHTYELLOW_EX}{Style.BRIGHT}against Discord's TOS!!{Style.RESET_ALL}{Fore.RESET}")
 time.sleep(0.8)
-print("Use this tool only for educational purposes and at your own risk")
+print(f"{Fore.LIGHTWHITE_EX}Use this tool only for educational purposes and at your own risk")
 time.sleep(0.8)
-print("Ask the server owner if you're allowed to use this tool")
-print(f'''{Fore.LIGHTGREEN_EX}{Style.BRIGHT}Mass Dm {Style.RESET_ALL}{Fore.RESET}will only work with a {Fore.LIGHTGREEN_EX}{Style.BRIGHT}Bot-Token{Style.RESET_ALL}{Fore.RESET} which has enabled{Style.BRIGHT}{Fore.LIGHTGREEN_EX} member intents{Style.RESET_ALL}{Fore.RESET}.
-This does also count for {Style.BRIGHT}{Fore.LIGHTGREEN_EX}Mass Ban{Fore.RESET}{Style.RESET_ALL} (in the Nuke part of the code) and {Fore.LIGHTGREEN_EX}{Style.BRIGHT}Mass Nickname{Style.RESET_ALL}{Fore.RESET} (in the Raid part of the code).
-{Fore.LIGHTGREEN_EX}{Style.BRIGHT}Mass Dm friends {Style.RESET_ALL}{Fore.RESET}will only work with a {Style.BRIGHT}{Fore.LIGHTGREEN_EX}Human-Token{Style.RESET_ALL}.
+print(f"{Fore.LIGHTWHITE_EX}Ask the server owner if you're allowed to use this tool")
+print(f'''{Fore.LIGHTGREEN_EX}{Style.BRIGHT}Mass Dm {Style.RESET_ALL}{Fore.RESET}{Fore.LIGHTWHITE_EX}will only work with a {Fore.LIGHTGREEN_EX}{Style.BRIGHT}Bot-Token{Style.RESET_ALL}{Fore.RESET}{Fore.LIGHTWHITE_EX} which has enabled{Style.BRIGHT}{Fore.LIGHTGREEN_EX} member intents{Style.RESET_ALL}{Fore.RESET}{Fore.LIGHTWHITE_EX}.
+This does also count for {Style.BRIGHT}{Fore.LIGHTGREEN_EX}Mass Ban{Fore.RESET}{Style.RESET_ALL}{Fore.LIGHTWHITE_EX} (in the Nuke part of the code) and {Fore.LIGHTGREEN_EX}{Style.BRIGHT}Mass Nickname{Style.RESET_ALL}{Fore.RESET}{Fore.LIGHTWHITE_EX} (in the Raid part of the code).
+{Fore.LIGHTGREEN_EX}{Style.BRIGHT}Mass Dm friends {Style.RESET_ALL}{Fore.RESET}{Fore.LIGHTWHITE_EX}will only work with a {Style.BRIGHT}{Fore.LIGHTGREEN_EX}Human-Token{Style.RESET_ALL}{Fore.LIGHTWHITE_EX}.
 ''')
 time.sleep(0.8)
 
 # poor booting animation:
-print(f"{Style.BRIGHT}Booting {Fore.RED}长闩尺ㄩ爪闩 {Fore.RESET}Bot")
+print(f"{Style.BRIGHT}{Fore.LIGHTWHITE_EX}Booting {Fore.RED}长闩尺ㄩ爪闩 {Fore.RESET}{Fore.LIGHTWHITE_EX}Bot")
 time.sleep(0.3)
 print(f"{Fore.RED}25%")
 time.sleep(0.5)
@@ -55,7 +60,7 @@ print(f"{Fore.LIGHTBLUE_EX}长闩尺ㄩ爪闩 Bot booted")
 time.sleep(1)
 
 # setting bot to true or false:
-chupapi = input('Are you using a Bot-Token(enter yes or no)?>> ')
+chupapi = input(f'{Fore.LIGHTWHITE_EX}Are you using a Bot-Token(enter yes or no)?>> ')
 if chupapi == "yes":
     munanyo = "BOT_TOKEN"
 elif chupapi == "no":
@@ -69,7 +74,7 @@ elif chupapi == "no":
     munanyo = "HUMAN_TOKEN"
 
 # getting the token:
-token = input('Input Token>> ')
+token = input(pyfade.Fade.Horizontal(pyfade.Colors.col, f"Input Token>> "))
 
 
 # main part of the code:
@@ -534,15 +539,17 @@ async def main():
         Connected = f"Guild Counter: {len(client.guilds)} | Friend Counter {len(client.user.friends)}"
     else:
         Connected = f"Guild Counter: {len(client.guilds)} | User Counter: {len(client.users)}"
+    print(pyfade.Fade.Horizontal(pyfade.Colors.yellow_to_red, '''
+██╗  ██╗ █████╗ ██████╗ ██╗   ██╗███╗   ███╗ █████╗ 
+██║ ██╔╝██╔══██╗██╔══██╗██║   ██║████╗ ████║██╔══██╗
+█████═╝ ███████║██████╔╝██║   ██║██╔████╔██║███████║
+██╔═██╗ ██╔══██║██╔══██╗██║   ██║██║╚██╔╝██║██╔══██║
+██║ ╚██╗██║  ██║██║  ██║╚██████╔╝██║ ╚═╝ ██║██║  ██║
+╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝
+'''))
     print(f'''
-{Fore.BLUE}██{Fore.WHITE}╗ {Fore.BLUE} ██{Fore.WHITE}╗ {Fore.BLUE}█████{Fore.WHITE}╗ {Fore.BLUE}██████{Fore.WHITE}╗ {Fore.BLUE}██{Fore.WHITE}╗   {Fore.BLUE}██{Fore.WHITE}╗{Fore.BLUE}███{Fore.WHITE}╗   {Fore.BLUE}███{Fore.WHITE}╗ {Fore.BLUE}█████{Fore.WHITE}╗
-{Fore.BLUE}██{Fore.WHITE}║ {Fore.BLUE}██{Fore.WHITE}╔╝{Fore.BLUE}██{Fore.WHITE}╔══{Fore.BLUE}██{Fore.WHITE}╗{Fore.BLUE}██{Fore.WHITE}╔══{Fore.BLUE}██{Fore.WHITE}╗{Fore.BLUE}██{Fore.WHITE}║   {Fore.BLUE}██{Fore.WHITE}║{Fore.BLUE}████{Fore.WHITE}╗ {Fore.BLUE}████{Fore.WHITE}║{Fore.BLUE}██{Fore.WHITE}╔══{Fore.BLUE}██{Fore.WHITE}╗
-{Fore.BLUE}█████{Fore.WHITE}═╝ {Fore.BLUE}███████{Fore.WHITE}║{Fore.BLUE}██████{Fore.WHITE}╔╝{Fore.BLUE}██{Fore.WHITE}║   {Fore.BLUE}██{Fore.WHITE}║{Fore.BLUE}██{Fore.WHITE}╔{Fore.BLUE}████{Fore.WHITE}╔{Fore.BLUE}██{Fore.WHITE}║{Fore.BLUE}███████{Fore.WHITE}║
-{Fore.BLUE}██{Fore.WHITE}╔═{Fore.BLUE}██{Fore.WHITE}╗ {Fore.BLUE}██{Fore.WHITE}╔══{Fore.BLUE}██{Fore.WHITE}║{Fore.BLUE}██{Fore.WHITE}╔══{Fore.BLUE}██{Fore.WHITE}╗{Fore.BLUE}██{Fore.WHITE}║   {Fore.BLUE}██{Fore.WHITE}║{Fore.BLUE}██{Fore.WHITE}║╚{Fore.BLUE}██{Fore.WHITE}╔╝{Fore.BLUE}██{Fore.WHITE}║{Fore.BLUE}██{Fore.WHITE}╔══{Fore.BLUE}██{Fore.WHITE}║
-{Fore.BLUE}██{Fore.WHITE}║ ╚{Fore.BLUE}██{Fore.WHITE}╗{Fore.BLUE}██{Fore.WHITE}║  {Fore.BLUE}██{Fore.WHITE}║{Fore.BLUE}██{Fore.WHITE}║  {Fore.BLUE}██{Fore.WHITE}║╚{Fore.BLUE}██████{Fore.WHITE}╔╝{Fore.BLUE}██{Fore.WHITE}║ ╚═╝ {Fore.BLUE}██{Fore.WHITE}║{Fore.BLUE}██{Fore.WHITE}║  {Fore.BLUE}██{Fore.WHITE}║
-{Fore.WHITE}╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝
-{Fore.WHITE}                                   Made by {Fore.YELLOW}hoemotion 
-{Fore.WHITE}Check out the github page for updates: {Fore.LIGHTBLUE_EX}https://github.com/hoemotion/Karuma/           
+{Fore.LIGHTWHITE_EX}                                   Made by {Fore.YELLOW}hoemotion 
+{Fore.LIGHTWHITE_EX}Check out the github page for updates: {Fore.LIGHTBLUE_EX}https://github.com/hoemotion/Karuma/           
 {Fore.LIGHTGREEN_EX}Logged in as {Fore.YELLOW}"{client.user}" {Fore.LIGHTGREEN_EX}(ID:{Fore.YELLOW} {client.user.id}{Fore.LIGHTGREEN_EX})
 {Connected}
 [0] Nuke
