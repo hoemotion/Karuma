@@ -8,7 +8,7 @@
 > Little preview of the selfbot and the embed
                 
 				
-![](https://img.shields.io/github/stars/pandao/editor.md.svg) ![](https://img.shields.io/badge/release-v1.7-blue) ![]()
+![](https://img.shields.io/badge/release-v1.7-blue)
 
 
 ### Features
