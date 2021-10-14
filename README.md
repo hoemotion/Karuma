@@ -11,6 +11,7 @@
 ![](https://img.shields.io/badge/release-v1.7-blue)
 
 
+
 ### Features
 
 - Mass DM Friends (Only available for Humans)
