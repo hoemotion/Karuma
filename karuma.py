@@ -10,11 +10,11 @@ except ImportError:
 
 import discord, pyfade
 from colorama import Fore, init, Style
+# module imports
 
-# imports all the stuff you'll need
-init()
-#this is required for some windows users
-# enabling member intents:
+init() # required for some windows users
+
+# member intents
 intents = discord.Intents().default()
 intents.members = True
 client = discord.Client(intents=intents)
@@ -32,20 +32,6 @@ This does also count for {Style.BRIGHT}{Fore.LIGHTGREEN_EX}Mass Ban{Fore.RESET}{
 {Fore.LIGHTGREEN_EX}{Style.BRIGHT}Mass Dm friends {Style.RESET_ALL}{Fore.RESET}{Fore.LIGHTWHITE_EX}will only work with a {Style.BRIGHT}{Fore.LIGHTGREEN_EX}Human-Token{Style.RESET_ALL}{Fore.LIGHTWHITE_EX}.
 ''')
 time.sleep(0.8)
-
-# poor booting animation:
-print(f"{Style.BRIGHT}{Fore.LIGHTWHITE_EX}Booting {Fore.RED}长闩尺ㄩ爪闩 {Fore.RESET}{Fore.LIGHTWHITE_EX}Bot")
-time.sleep(0.3)
-print(f"{Fore.RED}25%")
-time.sleep(0.5)
-print(f"{Fore.YELLOW}50%")
-time.sleep(0.6)
-print(f"{Fore.LIGHTYELLOW_EX}75%")
-time.sleep(0.7)
-print(f"{Fore.LIGHTGREEN_EX}99%")
-time.sleep(1)
-print(f"{Fore.LIGHTBLUE_EX}长闩尺ㄩ爪闩 Bot booted")
-time.sleep(1)
 
 # setting bot to true or false:
 chupapi = input(f'{Fore.LIGHTWHITE_EX}Are you using a Bot-Token(enter yes or no)?>> ')
