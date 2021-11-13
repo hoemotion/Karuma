@@ -45,6 +45,19 @@ def forceinput(prompt: str, *options: str) -> str:
 def clear():
     os.system('cls' if os.name == 'nt' else 'clear')
 
+def getguild():
+    while True:
+        try:
+            guild_id = int(input('Enter the server ID\n> '))
+            break
+        except ValueError:
+            print(f'{Fore.RED}ID Must be a Number!')
+
+        guild = client.get_guild(guild_id)
+        if guild is None:
+            print(f"Guild ID \"{guild_id}\" not found!")
+        
+        return guild
 
 # obtain token:
 token_type = "bot" if forceinput(
@@ -62,18 +75,7 @@ async def main():
                 f"{Fore.RED}Mass Dm doesn't work with a Human-Token\nPress Enter to return to the main menu")
             return
         print(f'{Fore.LIGHTYELLOW_EX}Mass Dm selected')
-        while True:
-            try:
-                guild_id = int(input('Enter the server ID\n> '))
-                break
-            except ValueError:
-                print(f'{Fore.RED}ID Must be a Number!')
-
-        clear()
-        guild = client.get_guild(guild_id)
-        if guild is None:
-            print(f"Guild ID \"{guild_id}\" not found!")
-            return
+        guild = getguild()
         
         membercount = len(guild.members)
         print(
@@ -91,7 +93,7 @@ async def main():
                     f"{Fore.RED}[❌] {index}/{membercount} Didn\'t send{Fore.WHITE} {message} {Fore.RED}to {Fore.YELLOW}{member}{Fore.RED} - {e}")
         print(f'{Fore.LIGHTGREEN_EX}⚡All tasks completed⚡')
         input(
-            f"\n{Fore.WHITE}Thanks for using {Fore.YELLOW}长闩尺ㄩ爪闩\nPress Enter to return to the main menu")
+            f"\nPress Enter to return to the main menu")
         return
 
     async def embedmassdmfriends():
@@ -99,10 +101,7 @@ async def main():
         if token_type == "bot":
             input(
                 f"{Fore.RED}Embed Mass Dm friends doesn\'t work with a Bot-Token\nPress Enter to return to the main menu")
-            clear()
             return
-        else:
-            pass
         print(f'{Fore.LIGHTYELLOW_EX}Embed Mass Dm friends was selected')
         print(f'{Fore.LIGHTYELLOW_EX}------')
         print('------')
@@ -147,7 +146,7 @@ async def main():
                     f"{Fore.RED}[❌] {index}/{friendcounter} Didn\'t send{Fore.WHITE} the embed {Fore.RED}to {Fore.YELLOW}{user}{Fore.RED} - {e}")
         print(f'{Fore.LIGHTGREEN_EX}⚡All tasks completed⚡')
         input(
-            f"\n{Fore.WHITE}Thanks for using {Fore.YELLOW}长闩尺ㄩ爪闩\nPress Enter to return to the main menu")
+            f"\nPress Enter to return to the main menu")
         clear()
         return
     # embed mass dm part of the code:
@@ -217,7 +216,7 @@ async def main():
                             f"{Fore.RED}[❌] {index}/{membercount} Didn\'t send{Fore.WHITE} the embed {Fore.RED}to {Fore.YELLOW}{member}{Fore.RED} - {e}")
         print(f'{Fore.LIGHTGREEN_EX}⚡All tasks completed⚡')
         input(
-            f"\n{Fore.WHITE}Thanks for using {Fore.YELLOW}长闩尺ㄩ爪闩\nPress Enter to return to the main menu")
+            f"\nPress Enter to return to the main menu")
         clear()
         return
     # nuke part of the code:
@@ -309,7 +308,7 @@ async def main():
                             f"{Fore.RED}[❌] {index}/{guildemojis} [EMOJI NOT DELETED] {Fore.WHITE}{emoji.name}{Fore.RED} in '{guild.name}' - {e}")
         print(f'{Fore.LIGHTGREEN_EX}⚡All tasks completed⚡')
         input(
-            f"\n{Fore.WHITE}Thanks for using {Fore.YELLOW}长闩尺ㄩ爪闩\nPress Enter to return to the main menu")
+            f"\nPress Enter to return to the main menu")
         clear()
         return
     # server id displayer:
@@ -341,7 +340,7 @@ async def main():
                 f"{Fore.LIGHTGREEN_EX}[{index}/{len(client.guilds)}] {Fore.YELLOW}{guild.name}{Fore.LIGHTGREEN_EX} - {Fore.YELLOW}{guild.id}{Fore.LIGHTGREEN_EX} | Total members: {Fore.YELLOW}{len(guild.members)}{Fore.LIGHTGREEN_EX}{INVITE}")
         print(f'{Fore.LIGHTGREEN_EX}⚡All tasks completed⚡')
         input(
-            f"\n{Fore.WHITE}Thanks for using {Fore.YELLOW}长闩尺ㄩ爪闩\nPress Enter to return to the main menu")
+            f"\nPress Enter to return to the main menu")
         clear()
         return
     # embed mass dm all client users:
@@ -404,7 +403,7 @@ async def main():
                         f"{Fore.RED}[❌] {index}/{usercount} Didn\'t send{Fore.WHITE} the embed {Fore.RED}to {Fore.YELLOW}{user}{Fore.RED} - {e}")
         print(f'{Fore.LIGHTGREEN_EX}⚡All tasks completed⚡')
         input(
-            f"\n{Fore.WHITE}Thanks for using {Fore.YELLOW}长闩尺ㄩ爪闩\nPress Enter to return to the main menu")
+            f"\nPress Enter to return to the main menu")
         clear()
     # mass dm client users:
 
@@ -438,7 +437,7 @@ async def main():
                         f"{Fore.RED}[❌] {index}/{usercount} Didn\'t send{Fore.WHITE} the embed {Fore.RED}to {Fore.YELLOW}{user}{Fore.RED} - {e}")
         print(f'{Fore.LIGHTGREEN_EX}⚡All tasks completed⚡')
         input(
-            f"\n{Fore.WHITE}Thanks for using {Fore.YELLOW}长闩尺ㄩ爪闩\nPress Enter to return to the main menu")
+            f"\nPress Enter to return to the main menu")
         clear()
     # guild leaver:
 
@@ -548,7 +547,7 @@ async def main():
                             f"{Fore.RED}[❌] {index}/{usercount} Couldn\'t change {Fore.WHITE}{user}\'s{Fore.RED} nickname in {guild.name} to {Fore.WHITE}{newnick}{Fore.RED} - {e}")
         print(f'{Fore.LIGHTGREEN_EX}⚡All tasks completed⚡')
         input(
-            f"\n{Fore.WHITE}Thanks for using {Fore.YELLOW}长闩尺ㄩ爪闩\nPress Enter to return to the main menu")
+            f"\nPress Enter to return to the main menu")
         clear()
         return
     if token_type == "human":
@@ -568,11 +567,11 @@ async def main():
 {Fore.LIGHTWHITE_EX}Check out the github page for updates: {Fore.LIGHTBLUE_EX}https://github.com/hoemotion/Karuma/           
 {Fore.LIGHTGREEN_EX}Logged in as {Fore.YELLOW}"{client.user}" {Fore.LIGHTGREEN_EX}(ID:{Fore.YELLOW} {client.user.id}{Fore.LIGHTGREEN_EX})
 {Connected}
-[0] Nuke
-[1] Raid                | [2] Mass Dm Client Users  | [3] Mass Embed Dm Client Users
-[4] Leave all Servers   | [5] Mass Dm               | [6] Mass Embed Dm
-[7] Display all Servers | [8] Mass Dm friends       | [9] Mass Embed Dm friends
-[10] Exit Script
+
+[1] Nuke                | [2] Raid                  | [3] Mass Dm Client Users
+[4] Mass Embed Dm       | [5] Mass Embed Dm friends | [6] Mass Embed Dm Client Users 
+[7] Mass Dm             | [8] Leave all Servers     | [9] Display all Servers
+[10] Exit
 ''')
     option = input(f"{Fore.LIGHTGREEN_EX}Select>> ")
     if option == '8':  # mass dm friends part of the code:
@@ -600,28 +599,28 @@ async def main():
         print(f'{Fore.LIGHTGREEN_EX}⚡All tasks completed⚡')
         input(f"Press Enter to return to the main menu")
 
-    elif option == '0':
+    elif option == '1':
         await Nuke()
+    elif option == '2':
+        await raid()
+    elif option == '3':
+        await dm_all_client_users()
+    elif option == '4':
+        await embedmassdm()
+    elif option == '5':
+        await embedmassdmfriends()
+    elif option == '6':
+        await embed_dm_all_client_users()
+    elif option == '7':
+        await massdm()
+    elif option == '8':
+        await guild_leaver()
+    elif option == '9':
+        await server_id_displayer()
     elif option == '10':
         await closeKaruma()
-    elif option == '1':
-        await raid()
-    elif option == '5':
-        await massdm()
-    elif option == '6':
-        await embedmassdm()
-    elif option == '9':
-        await embedmassdmfriends()
-    elif option == '7':
-        await server_id_displayer()
-    elif option == '4':
-        await guild_leaver()
-    elif option == '3':
-        await embed_dm_all_client_users()
-    elif option == '2':
-        await dm_all_client_users()
     else:
-        input(f"{Fore.RED}Invalid option😅\nPress Enter to return to the main menu")
+        input(f"{Fore.RED}Invalid option\nPress Enter to return to the main menu")
 
 # on ready event:
 
