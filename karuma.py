@@ -1,28 +1,16 @@
-import time
-from os import system, name
-import sys
-import os
+import time, sys, os, subprocess, asyncio, json # std modules
+
 sys.tracebacklimit = 0
-import subprocess
 try:
-    import discord
+    import discord, colorama, pyfade
 except ImportError:
     subprocess.check_call([sys.executable, "-m", "pip", "install", 'discord.py'])
-import discord
-from discord.ext import commands
-import json
-try:
-    import colorama
-except ImportError:
     subprocess.check_call([sys.executable, "-m", "pip", "install", 'colorama'])
-from colorama import Fore, init, Style
-from datetime import datetime
-import asyncio
-import time
-try:
-    import pyfade
-except ImportError:
     subprocess.check_call([sys.executable, "-m", "pip", "install", 'pyfade'])
+
+import discord, pyfade
+from colorama import Fore, init, Style
+
 # imports all the stuff you'll need
 init()
 #this is required for some windows users
