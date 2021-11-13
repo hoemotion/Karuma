@@ -20,17 +20,17 @@ intents.members = True
 client = discord.Client(intents=intents)
 
 # disclaimer:
- print(f"{Fore.LIGHTWHITE_EX}{Style.BRIGHT}DISCLAIMER:")
- time.sleep(0.5)
- print(f"{Style.RESET_ALL}{Fore.LIGHTWHITE_EX}User automation and spamming are {Fore.LIGHTYELLOW_EX}{Style.BRIGHT}against Discord's TOS!!{Style.RESET_ALL}{Fore.RESET}")
- time.sleep(0.8)
- print(f"{Fore.LIGHTWHITE_EX}Use this tool only for educational purposes and at your own risk")
- time.sleep(0.8)
- print(f"{Fore.LIGHTWHITE_EX}Ask the server owner if you're allowed to use this tool")
- print(f'''{Fore.LIGHTGREEN_EX}{Style.BRIGHT}Mass Dm {Style.RESET_ALL}{Fore.RESET}{Fore.LIGHTWHITE_EX}will only work with a {Fore.LIGHTGREEN_EX}{Style.BRIGHT}Bot-Token{Style.RESET_ALL}{Fore.RESET}{Fore.LIGHTWHITE_EX} which has enabled{Style.BRIGHT}{Fore.LIGHTGREEN_EX} member intents{Style.RESET_ALL}{Fore.RESET}{Fore.LIGHTWHITE_EX}.
- This does also count for {Style.BRIGHT}{Fore.LIGHTGREEN_EX}Mass Ban{Fore.RESET}{Style.RESET_ALL}{Fore.LIGHTWHITE_EX} (in the Nuke part of the code) and {Fore.LIGHTGREEN_EX}{Style.BRIGHT}Mass Nickname{Style.RESET_ALL}{Fore.RESET}{Fore.LIGHTWHITE_EX} (in the Raid part of the code).
- {Fore.LIGHTGREEN_EX}{Style.BRIGHT}Mass Dm friends {Style.RESET_ALL}{Fore.RESET}{Fore.LIGHTWHITE_EX}will only work with a {Style.BRIGHT}{Fore.LIGHTGREEN_EX}Human-Token{Style.RESET_ALL}{Fore.LIGHTWHITE_EX}.
- ''')
+print(f"{Fore.LIGHTWHITE_EX}{Style.BRIGHT}DISCLAIMER:")
+time.sleep(0.5)
+print(f"{Style.RESET_ALL}{Fore.LIGHTWHITE_EX}User automation and spamming are {Fore.LIGHTYELLOW_EX}{Style.BRIGHT}against Discord's TOS!!{Style.RESET_ALL}{Fore.RESET}")
+time.sleep(0.8)
+print(f"{Fore.LIGHTWHITE_EX}Use this tool only for educational purposes and at your own risk")
+time.sleep(0.8)
+print(f"{Fore.LIGHTWHITE_EX}Ask the server owner if you're allowed to use this tool")
+print(f'''{Fore.LIGHTGREEN_EX}{Style.BRIGHT}Mass Dm {Style.RESET_ALL}{Fore.RESET}{Fore.LIGHTWHITE_EX}will only work with a {Fore.LIGHTGREEN_EX}{Style.BRIGHT}Bot-Token{Style.RESET_ALL}{Fore.RESET}{Fore.LIGHTWHITE_EX} which has enabled{Style.BRIGHT}{Fore.LIGHTGREEN_EX} member intents{Style.RESET_ALL}{Fore.RESET}{Fore.LIGHTWHITE_EX}.
+This does also count for {Style.BRIGHT}{Fore.LIGHTGREEN_EX}Mass Ban{Fore.RESET}{Style.RESET_ALL}{Fore.LIGHTWHITE_EX} (in the Nuke part of the code) and {Fore.LIGHTGREEN_EX}{Style.BRIGHT}Mass Nickname{Style.RESET_ALL}{Fore.RESET}{Fore.LIGHTWHITE_EX} (in the Raid part of the code).
+{Fore.LIGHTGREEN_EX}{Style.BRIGHT}Mass Dm friends {Style.RESET_ALL}{Fore.RESET}{Fore.LIGHTWHITE_EX}will only work with a {Style.BRIGHT}{Fore.LIGHTGREEN_EX}Human-Token{Style.RESET_ALL}{Fore.LIGHTWHITE_EX}.
+''')
 
 
 def forceinput(prompt: str, *options: str) -> str:
@@ -47,9 +47,9 @@ def clear():
 
 
 # obtain token:
- token_type = "bot" if forceinput(
-     f'{Fore.LIGHTWHITE_EX}Are you using a Bot token? (yes/no)\n> ', 'yes', 'no') == "yes" else "human"
- token = input(pyfade.Fade.Horizontal(
+token_type = "bot" if forceinput(
+    f'{Fore.LIGHTWHITE_EX}Are you using a Bot token? (yes/no)\n> ', 'yes', 'no') == "yes" else "human"
+token = input(pyfade.Fade.Horizontal(
      pyfade.Colors.col, f"Enter your token\n> "))
 
 # main
