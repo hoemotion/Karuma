@@ -1,7 +1,7 @@
-
-
-
 # Karuma
+
+## Update is coming soon...
+- Check out [this](https://github.com/hoemotion/Discord-Mass-DM) Mass DM repo too (it supports mass dming guilds as a selfbot)
 
 ![](https://media.discordapp.net/attachments/890913525017505792/897465363426574357/unknown.png?width=1286&height=717)
 ![](https://cdn.discordapp.com/attachments/890913525017505792/891049094133448724/unknown.png)
