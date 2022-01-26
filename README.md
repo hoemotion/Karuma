@@ -33,7 +33,7 @@
 ## Having Issues?
 - This is my Support-Server:
  
-<a href = "https://discord.gg/verQuxaBqy"><img src="https://img.icons8.com/color/48/000000/discord.png"/></a>
+<a href = "https://guilded.gg/karma"><img src="https://img.icons8.com/fluency/48/000000/guilded.png"/></a>
 
 ## Please use this tool for educational purposes only
 
