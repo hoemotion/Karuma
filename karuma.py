@@ -32,49 +32,55 @@ intents.members = True
 client = discord.Client(intents=intents)
 
 # disclaimer:
-print(f"{Fore.LIGHTWHITE_EX}{Style.BRIGHT}DISCLAIMER:")
-time.sleep(0.5)
-print(f"{Style.RESET_ALL}{Fore.LIGHTWHITE_EX}User automation and spamming are {Fore.LIGHTYELLOW_EX}{Style.BRIGHT}against Discord's TOS!!{Style.RESET_ALL}{Fore.RESET}")
-time.sleep(0.8)
-print(f"{Fore.LIGHTWHITE_EX}Use this tool only for educational purposes and at your own risk")
-time.sleep(0.8)
-print(f"{Fore.LIGHTWHITE_EX}Ask the server owner if you're allowed to use this tool")
-print(f'''{Fore.LIGHTGREEN_EX}{Style.BRIGHT}Mass Dm {Style.RESET_ALL}{Fore.RESET}{Fore.LIGHTWHITE_EX}will only work with a {Fore.LIGHTGREEN_EX}{Style.BRIGHT}Bot-Token{Style.RESET_ALL}{Fore.RESET}{Fore.LIGHTWHITE_EX} which has enabled{Style.BRIGHT}{Fore.LIGHTGREEN_EX} member intents{Style.RESET_ALL}{Fore.RESET}{Fore.LIGHTWHITE_EX}.
-This does also count for {Style.BRIGHT}{Fore.LIGHTGREEN_EX}Mass Ban{Fore.RESET}{Style.RESET_ALL}{Fore.LIGHTWHITE_EX} (in the Nuke part of the code) and {Fore.LIGHTGREEN_EX}{Style.BRIGHT}Mass Nickname{Style.RESET_ALL}{Fore.RESET}{Fore.LIGHTWHITE_EX} (in the Raid part of the code).
-{Fore.LIGHTGREEN_EX}{Style.BRIGHT}Mass Dm friends {Style.RESET_ALL}{Fore.RESET}{Fore.LIGHTWHITE_EX}will only work with a {Style.BRIGHT}{Fore.LIGHTGREEN_EX}Human-Token{Style.RESET_ALL}{Fore.LIGHTWHITE_EX}.
-''')
-time.sleep(0.8)
+to_print_disclaimer = [f"{Fore.LIGHTWHITE_EX}{Style.BRIGHT}DISCLAIMER:", 
+                       f"{Style.RESET_ALL}{Fore.LIGHTWHITE_EX}User automation and spamming are {Fore.LIGHTYELLOW_EX}{Style.BRIGHT}against Discord's TOS!!{Style.RESET_ALL}{Fore.RESET}", 
+                       f"{Fore.LIGHTWHITE_EX}Use this tool only for educational purposes and at your own risk",
+                       f"{Fore.LIGHTWHITE_EX}Ask the server owner if you're allowed to use this tool",
+                       f'''{Fore.LIGHTGREEN_EX}{Style.BRIGHT}Mass Dm {Style.RESET_ALL}{Fore.RESET}{Fore.LIGHTWHITE_EX}will only work with a {Fore.LIGHTGREEN_EX}{Style.BRIGHT}Bot-Token{Style.RESET_ALL}{Fore.RESET}{Fore.LIGHTWHITE_EX} which has enabled{Style.BRIGHT}{Fore.LIGHTGREEN_EX} member intents{Style.RESET_ALL}{Fore.RESET}{Fore.LIGHTWHITE_EX}.
+                        This does also count for {Style.BRIGHT}{Fore.LIGHTGREEN_EX}Mass Ban{Fore.RESET}{Style.RESET_ALL}{Fore.LIGHTWHITE_EX} (in the Nuke part of the code) and {Fore.LIGHTGREEN_EX}{Style.BRIGHT}Mass Nickname{Style.RESET_ALL}{Fore.RESET}{Fore.LIGHTWHITE_EX} (in the Raid part of the code).
+                        {Fore.LIGHTGREEN_EX}{Style.BRIGHT}Mass Dm friends {Style.RESET_ALL}{Fore.RESET}{Fore.LIGHTWHITE_EX}will only work with a {Style.BRIGHT}{Fore.LIGHTGREEN_EX}Human-Token{Style.RESET_ALL}{Fore.LIGHTWHITE_EX}.
+                        ''']
+
+for item in to_print_disclaimer:
+    print(item)
+    time.sleep(0.6)
 
 # poor booting animation:
-print(f"{Style.BRIGHT}{Fore.LIGHTWHITE_EX}Booting {Fore.RED}长闩尺ㄩ爪闩 {Fore.RESET}{Fore.LIGHTWHITE_EX}Bot")
-time.sleep(0.3)
-print(f"{Fore.RED}25%")
-time.sleep(0.5)
-print(f"{Fore.YELLOW}50%")
-time.sleep(0.6)
-print(f"{Fore.LIGHTYELLOW_EX}75%")
-time.sleep(0.7)
-print(f"{Fore.LIGHTGREEN_EX}99%")
-time.sleep(1)
-print(f"{Fore.LIGHTBLUE_EX}长闩尺ㄩ爪闩 Bot booted")
-time.sleep(1)
+boot_anim = [f"{Style.BRIGHT}{Fore.LIGHTWHITE_EX}Booting {Fore.RED}长闩尺ㄩ爪闩 {Fore.RESET}{Fore.LIGHTWHITE_EX}Bot",
+             f"{Fore.RED}25%",
+             f"{Fore.YELLOW}50%",
+             f"{Fore.LIGHTYELLOW_EX}75%",
+             f"{Fore.LIGHTGREEN_EX}99%",
+             f"{Fore.LIGHTBLUE_EX}长闩尺ㄩ爪闩 Bot booted"]
+
+for index, item in enumerate(boot_anim):
+    wait_dict = {
+        0: 0.3,
+        1: 0.5,
+        2: 0.6,
+        3: 0.7,
+        4: 1,
+        5: 1,
+    }
+    print(item)
+    time.sleep(wait_dict[index])
 
 # setting bot to true or false:
 chupapi = input(f'{Fore.LIGHTWHITE_EX}Are you using a Bot-Token(enter yes or no)?>> ')
-if chupapi == "yes":
-    munanyo = "BOT_TOKEN"
-elif chupapi == "no":
+if chupapi == "no":
     munanyo = "HUMAN_TOKEN"
-while chupapi !="no" and chupapi != "yes":
+elif chupapi == "yes":
+    munanyo = "BOT_TOKEN"
+while chupapi not in ["no", "yes"]:
     print(f'{Fore.RED}Invalid option😅\nPlease Enter yes or no')
     chupapi = input('Are you using a Bot-Token(enter yes or no)?>> ')
-if chupapi == "yes":
-    munanyo = "BOT_TOKEN"
-elif chupapi == "no":
+if chupapi == "no":
     munanyo = "HUMAN_TOKEN"
 
+elif chupapi == "yes":
+    munanyo = "BOT_TOKEN"
 # getting the token:
-token = input(pyfade.Fade.Horizontal(pyfade.Colors.col, f"Input Token>> "))
+token = input(pyfade.Fade.Horizontal(pyfade.Colors.col, 'Input Token>> '))
 
 
 # main part of the code:
@@ -315,8 +321,8 @@ async def main():
         for guild in client.guilds:
             if munanyo == "BOT_TOKEN":
                 try:
-                    senpai = 0
                     if len(await guild.invites()) != 0:
+                        senpai = 0
                         for invite in await guild.invites():
                             while senpai < 1:
                                 INVITE = f" | Serverinvite: {invite}"
