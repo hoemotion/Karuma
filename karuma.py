@@ -41,9 +41,16 @@ to_print_disclaimer = [f"{Fore.LIGHTWHITE_EX}{Style.BRIGHT}DISCLAIMER:",
                         {Fore.LIGHTGREEN_EX}{Style.BRIGHT}Mass Dm friends {Style.RESET_ALL}{Fore.RESET}{Fore.LIGHTWHITE_EX}will only work with a {Style.BRIGHT}{Fore.LIGHTGREEN_EX}Human-Token{Style.RESET_ALL}{Fore.LIGHTWHITE_EX}.
                         ''']
 
-for item in to_print_disclaimer:
+for index, item in enumerate(to_print_disclaimer):
+    to_sleep = {
+        0: 0.5,
+        1: 0.8,
+        2: 0.8,
+        3: 0,
+        4: 0.8,
+    }
     print(item)
-    time.sleep(0.6)
+    time.sleep(to_sleep[index])
 
 # poor booting animation:
 boot_anim = [f"{Style.BRIGHT}{Fore.LIGHTWHITE_EX}Booting {Fore.RED}长闩尺ㄩ爪闩 {Fore.RESET}{Fore.LIGHTWHITE_EX}Bot",
