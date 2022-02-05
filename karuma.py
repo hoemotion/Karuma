@@ -87,8 +87,6 @@ async def main():
                 f"{Fore.RED}Mass Dm doesn\'t work with a Human-Token\nPress Enter to return to the main menu")
             os.system('cls' if os.name == 'nt' else 'clear')
             await main()
-        else:
-            pass
         print(f'{Fore.LIGHTYELLOW_EX}Mass Dm was selected')
         while True:
             try:
@@ -126,8 +124,6 @@ async def main():
                 f"{Fore.RED}Embed Mass Dm friends doesn\'t work with a Bot-Token\nPress Enter to return to the main menu")
             os.system('cls' if os.name == 'nt' else 'clear')
             await main()
-        else:
-            pass
         print(f'{Fore.LIGHTYELLOW_EX}Embed Mass Dm friends was selected')
         print(f'{Fore.LIGHTYELLOW_EX}------')
         print('------')
@@ -144,8 +140,6 @@ async def main():
         if title and desc and thumb and img and footer and footer_icon and author and icn is None:
             input(f"{Fore.RED}You can\'t set everything to none!\nPress Enter to return to the main menu")
             await main()
-        else:
-            pass
         karma = discord.Embed(
             title=f"{title}",
             description=f'{desc}',
@@ -177,8 +171,6 @@ async def main():
                 f"{Fore.RED}Embed Mass Dm doesn\'t work with a Human-Token\nPress Enter to return to the main menu")
             os.system('cls' if os.name == 'nt' else 'clear')
             await main()
-        else:
-            pass
         print(f'{Fore.LIGHTYELLOW_EX}Embed Mass Dm was selected')
         while True:
             try:
@@ -208,8 +200,6 @@ async def main():
                     input(
                         f"{Fore.RED}You can\'t set everything to none!\nPress Enter to return to the main menu")
                     await main()
-                else:
-                    pass
                 kamehameha = discord.Embed(
                     title=f"{hanime_tv}",
                     description=f'{hentai}',
@@ -240,8 +230,6 @@ async def main():
         print('Nuke was selected')
         if chupapi == "no":
             print(f"{Fore.RED}Mass Ban will not work with a Human-Token")
-        else:
-            pass
         while True:
             try:
                 server_id = int(input(f'{Fore.LIGHTYELLOW_EX}Enter the server ID: '))
@@ -361,8 +349,6 @@ async def main():
                 f"{Fore.RED}Embed Mass Dm doesn\'t work with a Human-Token\nPress Enter to return to the main menu")
             os.system('cls' if os.name == 'nt' else 'clear')
             await main()
-        else:
-            pass
         print(f'{Fore.LIGHTYELLOW_EX}Embed Mass Dm Client Users was selected')
         print(f'{Fore.LIGHTYELLOW_EX}------')
         for user in client.users:
@@ -382,8 +368,6 @@ async def main():
                 input(
                     f"{Fore.RED}You can\'t set everything to none!\nPress Enter to return to the main menu")
                 await main()
-            else:
-                pass
             kamehameha = discord.Embed(
                 title=f"{hanime_tv}",
                 description=f'{hentai}',
@@ -417,8 +401,6 @@ async def main():
                 f"{Fore.RED}Mass Dm Client Users doesn\'t work with a Human-Token\nPress Enter to return to the main menu")
             os.system('cls' if os.name == 'nt' else 'clear')
             await main()
-        else:
-            pass
         print(f'{Fore.LIGHTYELLOW_EX}Embed Mass Dm Client Users was selected')
         print(f'{Fore.LIGHTYELLOW_EX}------')
         for user in client.users:
@@ -483,8 +465,6 @@ async def main():
         print('Raid was selected')
         if chupapi == "no":
             print(f"{Fore.RED}Mass Nickname does only work with a Bot-Token")
-        else:
-            pass
         while True:
             try:
                 server_id = int(input(f'{Fore.LIGHTYELLOW_EX}Enter the server ID: '))
