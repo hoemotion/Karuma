@@ -1,0 +1,4 @@
+# for virtual environments
+.venv
+# automatically generated .vscode folder
+.vscode
