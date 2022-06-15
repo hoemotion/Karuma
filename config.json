@@ -1,0 +1,12 @@
+{
+  "token": "Your Token Here",
+  "skip_disclaimer": true,
+  "skip_booting": true,
+  "minimum_dm_delay": 0.1,
+  "maximum_dm_delay": 0.3,
+  "minimum_ban_delay": 0.1,
+  "maximum_ban_delay": 0.3,
+  "minimum_general_delay": 0.1,
+  "maximum_general_delay": 0.3,
+  "bot": true
+}
