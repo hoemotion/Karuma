@@ -1,8 +1,5 @@
 # Karuma
 
-## Update is coming soon...
-- Check out [this](https://github.com/hoemotion/Discord-Mass-DM) Mass DM repo too (it supports mass dming guilds as a selfbot)
-
 ![](karuma.png)
 ![](https://cdn.discordapp.com/attachments/890913525017505792/891049094133448724/unknown.png)
 > Little preview of the selfbot and the embed
@@ -15,7 +12,7 @@
 ### Features
 
 - Mass DM Friends (Only available for Humans)
-- Mass Embed DM Friends (Only available for Humans)
+- Mass Embed DM Friends (Only available for Humans) *Has been patched by Discord*
 - Nuke Discord Servers (Mass Ban only working for Bots)
 - Raid Discord Servers (Mass Nickname only working for Bots)
 - Mass DM (Sends every member a DM - Only available for Bots)
