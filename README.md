@@ -2,10 +2,10 @@
 
 ![](karuma.png)
 ![](https://cdn.discordapp.com/attachments/890913525017505792/891049094133448724/unknown.png)
-> Little preview of the selfbot and the embed
+> Little preview of the bot and the embed
                 
 				
-![](https://img.shields.io/badge/release-v1.7-blue)
+![](https://img.shields.io/badge/release-v1.8-blue)
 
 
 
@@ -25,7 +25,7 @@
 
 ### Don't forget to leave a Star!
 
-- Please don't forget to leave a star ⭐️.
+- Share this repo with your friends and leave a star ⭐️
 
 ## Having Issues?
 - This is my Support-Server:
