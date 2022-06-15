@@ -1,7 +1,6 @@
 import time
 from os import system, name
-import sys
-import os
+import sys, os, json, random
 sys.tracebacklimit = 0
 import subprocess
 try:
@@ -23,6 +22,7 @@ try:
     import pyfade
 except ImportError:
     subprocess.check_call([sys.executable, "-m", "pip", "install", 'pyfade'])
+    import pyfade
 # imports all the stuff you'll need
 init()
 #this is required for some windows users
@@ -31,26 +31,34 @@ intents = discord.Intents().default()
 intents.members = True
 client = discord.Client(intents=intents)
 
+setup_json = open(f"./config.json", "r")
+setup = json.load(setup_json)
+minimum_dm, maximum_dm, bot, token, boot, disclaimer, min_ban, max_ban, min_general, max_general = setup["minimum_dm_delay"], setup["maximum_dm_delay"], setup["bot"], setup["token"], setup["skip_booting"], setup["skip_disclaimer"], setup["minimum_ban_delay"], setup["maximum_ban_delay"], setup["minimum_general_delay"], setup["maximum_general_delay"]
+
+def random_cooldown(minimum, maximum):
+    cooldown = random.randint(minimum*100,maximum*100) / 100
+    return cooldown
+
 # disclaimer:
-to_print_disclaimer = [f"{Fore.LIGHTWHITE_EX}{Style.BRIGHT}DISCLAIMER:", 
-                       f"{Style.RESET_ALL}{Fore.LIGHTWHITE_EX}User automation and spamming are {Fore.LIGHTYELLOW_EX}{Style.BRIGHT}against Discord's TOS!!{Style.RESET_ALL}{Fore.RESET}", 
+to_print_disclaimer = [f"{Fore.LIGHTWHITE_EX}{Style.BRIGHT}DISCLAIMER:",
+                       f"{Style.RESET_ALL}{Fore.LIGHTWHITE_EX}User automation and spamming are {Fore.LIGHTYELLOW_EX}{Style.BRIGHT}against Discord's TOS!!{Style.RESET_ALL}{Fore.RESET}",
                        f"{Fore.LIGHTWHITE_EX}Use this tool only for educational purposes and at your own risk",
                        f"{Fore.LIGHTWHITE_EX}Ask the server owner if you're allowed to use this tool",
                        f'''{Fore.LIGHTGREEN_EX}{Style.BRIGHT}Mass Dm {Style.RESET_ALL}{Fore.RESET}{Fore.LIGHTWHITE_EX}will only work with a {Fore.LIGHTGREEN_EX}{Style.BRIGHT}Bot-Token{Style.RESET_ALL}{Fore.RESET}{Fore.LIGHTWHITE_EX} which has enabled{Style.BRIGHT}{Fore.LIGHTGREEN_EX} member intents{Style.RESET_ALL}{Fore.RESET}{Fore.LIGHTWHITE_EX}.
                         This does also count for {Style.BRIGHT}{Fore.LIGHTGREEN_EX}Mass Ban{Fore.RESET}{Style.RESET_ALL}{Fore.LIGHTWHITE_EX} (in the Nuke part of the code) and {Fore.LIGHTGREEN_EX}{Style.BRIGHT}Mass Nickname{Style.RESET_ALL}{Fore.RESET}{Fore.LIGHTWHITE_EX} (in the Raid part of the code).
                         {Fore.LIGHTGREEN_EX}{Style.BRIGHT}Mass Dm friends {Style.RESET_ALL}{Fore.RESET}{Fore.LIGHTWHITE_EX}will only work with a {Style.BRIGHT}{Fore.LIGHTGREEN_EX}Human-Token{Style.RESET_ALL}{Fore.LIGHTWHITE_EX}.
                         ''']
-
-for index, item in enumerate(to_print_disclaimer):
-    to_sleep = {
-        0: 0.5,
-        1: 0.8,
-        2: 0.8,
-        3: 0,
-        4: 0.8,
-    }
-    print(item)
-    time.sleep(to_sleep[index])
+if not disclaimer:
+    for index, item in enumerate(to_print_disclaimer):
+        to_sleep = {
+            0: 0.5,
+            1: 0.8,
+            2: 0.8,
+            3: 0,
+            4: 0.8,
+        }
+        print(item)
+        time.sleep(to_sleep[index])
 
 # poor booting animation:
 boot_anim = [f"{Style.BRIGHT}{Fore.LIGHTWHITE_EX}Booting {Fore.RED}长闩尺ㄩ爪闩 {Fore.RESET}{Fore.LIGHTWHITE_EX}Bot",
@@ -59,47 +67,26 @@ boot_anim = [f"{Style.BRIGHT}{Fore.LIGHTWHITE_EX}Booting {Fore.RED}长闩尺ㄩ�
              f"{Fore.LIGHTYELLOW_EX}75%",
              f"{Fore.LIGHTGREEN_EX}99%",
              f"{Fore.LIGHTBLUE_EX}长闩尺ㄩ爪闩 Bot booted"]
+if not boot:
+    for index, item in enumerate(boot_anim):
+        wait_dict = {
+            0: 0.3,
+            1: 0.5,
+            2: 0.6,
+            3: 0.7,
+            4: 1,
+            5: 1,
+        }
+        print(item)
+        time.sleep(wait_dict[index])
 
-for index, item in enumerate(boot_anim):
-    wait_dict = {
-        0: 0.3,
-        1: 0.5,
-        2: 0.6,
-        3: 0.7,
-        4: 1,
-        5: 1,
-    }
-    print(item)
-    time.sleep(wait_dict[index])
-
-# setting bot to true or false:
-chupapi = input(f'{Fore.LIGHTWHITE_EX}Are you using a Bot-Token(enter yes or no)?>> ')
-if chupapi == "no":
-    munanyo = "HUMAN_TOKEN"
-elif chupapi == "yes":
-    munanyo = "BOT_TOKEN"
-while chupapi not in ["no", "yes"]:
-    print(f'{Fore.RED}Invalid option😅\nPlease Enter yes or no')
-    chupapi = input('Are you using a Bot-Token(enter yes or no)?>> ')
-if chupapi == "no":
-    munanyo = "HUMAN_TOKEN"
-
-elif chupapi == "yes":
-    munanyo = "BOT_TOKEN"
-# getting the token:
-token = input(pyfade.Fade.Horizontal(pyfade.Colors.col, 'Input Token>> '))
-
-
-# main part of the code:
-async def main():
-    # mass dm part of the code:
-    async def massdm():
+async def massdm():
         print(f'{Fore.LIGHTYELLOW_EX}------')
-        if chupapi == "no":
+        if not bot:
             input(
                 f"{Fore.RED}Mass Dm doesn\'t work with a Human-Token\nPress Enter to return to the main menu")
             os.system('cls' if os.name == 'nt' else 'clear')
-            await main()
+            return await main()
         print(f'{Fore.LIGHTYELLOW_EX}Mass Dm was selected')
         while True:
             try:
@@ -117,26 +104,26 @@ async def main():
                 membercount = len(guild.members)
                 index = 0
                 for member in guild.members:
+                    cooldown = random_cooldown(minimum_dm, maximum_dm)
                     index += 1
                     try:
                         await member.send(ahegao)
                         print(
                             f"{Fore.LIGHTGREEN_EX}[✅] {index}/{membercount} Sent{Fore.WHITE} {ahegao} {Fore.LIGHTGREEN_EX}to {Fore.YELLOW}{member}")
-                        await asyncio.sleep(0.1)
+                        await asyncio.sleep(cooldown)
                     except Exception as e:
                         print(
                             f"{Fore.RED}[❌] {index}/{membercount} Didn\'t send{Fore.WHITE} {ahegao} {Fore.RED}to {Fore.YELLOW}{member}{Fore.RED} - {e}")
         print(f'{Fore.LIGHTGREEN_EX}⚡All tasks completed⚡')
         input(f"\n{Fore.WHITE}Thanks for using {Fore.YELLOW}长闩尺ㄩ爪闩\nPress Enter to return to the main menu")
-        await main()
-    # embed mass dm friends part of the code:
-    async def embedmassdmfriends():
+        return await main()
+async def embedmassdmfriends():
         print(f'{Fore.LIGHTYELLOW_EX}------')
-        if chupapi == "yes":
+        if bot:
             input(
                 f"{Fore.RED}Embed Mass Dm friends doesn\'t work with a Bot-Token\nPress Enter to return to the main menu")
             os.system('cls' if os.name == 'nt' else 'clear')
-            await main()
+            return await main()
         print(f'{Fore.LIGHTYELLOW_EX}Embed Mass Dm friends was selected')
         print(f'{Fore.LIGHTYELLOW_EX}------')
         print('------')
@@ -164,22 +151,23 @@ async def main():
         friendcounter = len(client.user.friends)
         index = 0
         for user in client.user.friends:
+            cooldown = random_cooldown(minimum_dm, maximum_dm)
             index += 1
             try:
                 await user.send(embed=karma)
                 print(f"{Fore.LIGHTGREEN_EX}[✅] {index}/{friendcounter} Sent{Fore.WHITE} the embed {Fore.LIGHTGREEN_EX}to {Fore.YELLOW}{user}")
-                await asyncio.sleep(0.1)
+                await asyncio.sleep(cooldown)
             except Exception as e:
                 print(
                     f"{Fore.RED}[❌] {index}/{friendcounter} Didn\'t send{Fore.WHITE} the embed {Fore.RED}to {Fore.YELLOW}{user}{Fore.RED} - {e}")
         print(f'{Fore.LIGHTGREEN_EX}⚡All tasks completed⚡')
         input(f"\n{Fore.WHITE}Thanks for using {Fore.YELLOW}长闩尺ㄩ爪闩\nPress Enter to return to the main menu")
         os.system('cls' if os.name == 'nt' else 'clear')
-        await main()
-    # embed mass dm part of the code:
-    async def embedmassdm():
+        return await main()
+
+async def embedmassdm():
         print(f'{Fore.LIGHTYELLOW_EX}------')
-        if chupapi == "no":
+        if not bot:
             input(
                 f"{Fore.RED}Embed Mass Dm doesn\'t work with a Human-Token\nPress Enter to return to the main menu")
             os.system('cls' if os.name == 'nt' else 'clear')
@@ -224,24 +212,87 @@ async def main():
                 membercount = len(guild.members)
                 index = 0
                 for member in guild.members:
+                    cooldown = random_cooldown(minimum_dm, maximum_dm)
                     index += 1
                     try:
                         await member.send(embed=kamehameha)
                         print(
                             f"{Fore.LIGHTGREEN_EX}[✅] {index}/{membercount} Sent{Fore.WHITE} the embed {Fore.LIGHTGREEN_EX}to {Fore.YELLOW}{member}")
-                        await asyncio.sleep(0.1)
+                        await asyncio.sleep(cooldown)
                     except Exception as e:
                         print(
                             f"{Fore.RED}[❌] {index}/{membercount} Didn\'t send{Fore.WHITE} the embed {Fore.RED}to {Fore.YELLOW}{member}{Fore.RED} - {e}")
         print(f'{Fore.LIGHTGREEN_EX}⚡All tasks completed⚡')
         input(f"\n{Fore.WHITE}Thanks for using {Fore.YELLOW}长闩尺ㄩ爪闩\nPress Enter to return to the main menu")
         os.system('cls' if os.name == 'nt' else 'clear')
-        await main()
-    # nuke part of the code:
-    async def Nuke():
+        return await main()
+
+async def embedmassdm():
+        print(f'{Fore.LIGHTYELLOW_EX}------')
+        if not bot:
+            input(
+                f"{Fore.RED}Embed Mass Dm doesn\'t work with a Human-Token\nPress Enter to return to the main menu")
+            os.system('cls' if os.name == 'nt' else 'clear')
+            await main()
+        print(f'{Fore.LIGHTYELLOW_EX}Embed Mass Dm was selected')
+        while True:
+            try:
+                guild_id = int(input('Enter the server ID: '))
+                break
+            except ValueError:
+                print(f'{Fore.RED}Invalid option😅')
+                continue
+        print(f'{Fore.LIGHTYELLOW_EX}------')
+        for guild in client.guilds:
+            if guild.id == guild_id:
+                print('Discord server "{}" was selected as a target...'.format(guild.name))
+                print('------')
+                hanime_tv = input(f"{Fore.LIGHTGREEN_EX}What Should Be The Title(leave blank for none)?>>  ")
+                hentai = input(f"{Fore.LIGHTGREEN_EX}What Should Be The Description(leave blank for none)?>>  ")
+                seggs = input(
+                    f"{Fore.LIGHTGREEN_EX}What Should Be The Thumbnail(Enter the url and leave blank for none)?>>  ")
+                incest = input(
+                    f"{Fore.LIGHTGREEN_EX}What Should Be The Image(Enter the url and leave blank for none)?>>  ")
+                knockknockknock = input(f"{Fore.LIGHTGREEN_EX}What Should Be The Footer(leave blank for none)?>>  ")
+                fbi = input(
+                    f"{Fore.LIGHTGREEN_EX}What Should Be The Footer-Icon(Enter the url and leave blank for none)?>>  ")
+                opn = input(f"{Fore.LIGHTGREEN_EX}Who Should Be The Message Author(leave blank for none)?>>  ")
+                up = input(
+                    f"{Fore.LIGHTGREEN_EX}What Should Be The Message Author Icon(Enter the url leave blank for none)?>>  ")
+                if hanime_tv and hentai and seggs and incest and knockknockknock and fbi and opn and up is None:
+                    input(
+                        f"{Fore.RED}You can\'t set everything to none!\nPress Enter to return to the main menu")
+                    return await main()
+                kamehameha = discord.Embed(
+                    title=f"{hanime_tv}",
+                    description=f'{hentai}',
+                    color=discord.Colour.purple())
+                kamehameha.set_thumbnail(url=f'{seggs}'),
+                kamehameha.set_image(url=f"{incest}")
+                kamehameha.set_footer(text=f"{knockknockknock}", icon_url=f"{fbi}")
+                kamehameha.set_author(name=f"{opn}", icon_url=f"{up}")
+                membercount = len(guild.members)
+                index = 0
+                for member in guild.members:
+                    cooldown = random_cooldown(minimum_dm, maximum_dm)
+                    index += 1
+                    try:
+                        await member.send(embed=kamehameha)
+                        print(
+                            f"{Fore.LIGHTGREEN_EX}[✅] {index}/{membercount} Sent{Fore.WHITE} the embed {Fore.LIGHTGREEN_EX}to {Fore.YELLOW}{member}")
+                        await asyncio.sleep(cooldown)
+                    except Exception as e:
+                        print(
+                            f"{Fore.RED}[❌] {index}/{membercount} Didn\'t send{Fore.WHITE} the embed {Fore.RED}to {Fore.YELLOW}{member}{Fore.RED} - {e}")
+        print(f'{Fore.LIGHTGREEN_EX}⚡All tasks completed⚡')
+        input(f"\n{Fore.WHITE}Thanks for using {Fore.YELLOW}长闩尺ㄩ爪闩\nPress Enter to return to the main menu")
+        os.system('cls' if os.name == 'nt' else 'clear')
+        return await main()
+
+async def Nuke():
         print(f'{Fore.LIGHTYELLOW_EX}------')
         print('Nuke was selected')
-        if chupapi == "no":
+        if not bot:
             print(f"{Fore.RED}Mass Ban will not work with a Human-Token")
         while True:
             try:
@@ -272,61 +323,66 @@ async def main():
                 index = 0
                 guildchannels = len(guild.channels)
                 for channel in guild.channels:
+                    cooldown = random_cooldown(min_general, max_general)
                     index += 1
                     try:
                         await channel.delete()
                         print(
                             f"{Fore.LIGHTGREEN_EX}[✅] {index}/{guildchannels} [CHANNEL DELETED] {Fore.WHITE}{channel.name}{Fore.LIGHTGREEN_EX} in '{guild.name}'")
-                        await asyncio.sleep(0.1)
+                        await asyncio.sleep(cooldown)
                     except Exception as e:
                         print(
                             f"{Fore.RED}[❌] {index}/{guildchannels} [CHANNEL NOT DELETED] {Fore.WHITE}{channel.name}{Fore.RED} in '{guild.name}' - {e}")
                 index = 0
                 guildroles = len(guild.roles)
                 for role in guild.roles:
+                    cooldown = random_cooldown(min_general, max_general)
                     index += 1
                     try:
                         await role.delete()
                         print(
                             f"{Fore.LIGHTGREEN_EX}[✅] {index}/{guildroles} [ROLE DELETED] {Fore.WHITE}{role.name}{Fore.LIGHTGREEN_EX} in '{guild.name}'")
-                        await asyncio.sleep(0.1)
+                        await asyncio.sleep(cooldown)
                     except Exception as e:
                         print(
                             f"{Fore.RED}[❌] {index}/{guildroles} [ROLE NOT DELETED] {Fore.WHITE}{role.name}{Fore.RED} in '{guild.name}' - {e}")
                 index = 0
                 guildmembers = len(guild.members)
                 for member in guild.members:
+                    cooldown = random_cooldown(min_ban, max_ban)
                     index += 1
                     try:
                         await guild.ban(member, reason=ban_reason, delete_message_days=7)
                         print(
                             f"{Fore.LIGHTGREEN_EX}[✅] {index}/{guildmembers} [BANNED] {Fore.WHITE}{member}{Fore.LIGHTGREEN_EX} (ID: {member.id}) in '{guild.name}'")
-                        await asyncio.sleep(0.1)
+                        await asyncio.sleep(cooldown)
                     except Exception as e:
                         print(
                             f"{Fore.RED}[❌] {index}/{guildmembers} [BAN FAILED] {Fore.WHITE}{member}{Fore.RED} (ID: {member.id}) in '{guild.name}'- {e}")
                 index = 0
                 guildemojis = len(guild.emojis)
                 for emoji in guild.emojis:
+                    cooldown = random_cooldown(min_general, max_general)
                     index += 1
                     print(emoji)
                     try:
                         await emoji.delete()
                         print(
                             f"{Fore.LIGHTGREEN_EX}[✅] {index}/{guildemojis} [EMOJI DELETED] {Fore.WHITE}{emoji.name}{Fore.LIGHTGREEN_EX} in '{guild.name}'")
-                        await asyncio.sleep(0.1)
+                        await asyncio.sleep(cooldown)
                     except Exception as e:
                         print(
                             f"{Fore.RED}[❌] {index}/{guildemojis} [EMOJI NOT DELETED] {Fore.WHITE}{emoji.name}{Fore.RED} in '{guild.name}' - {e}")
         print(f'{Fore.LIGHTGREEN_EX}⚡All tasks completed⚡')
         input(f"\n{Fore.WHITE}Thanks for using {Fore.YELLOW}长闩尺ㄩ爪闩\nPress Enter to return to the main menu")
         os.system('cls' if os.name == 'nt' else 'clear')
-        await main()
-    # server id displayer:
-    async def server_id_displayer():
+        return await main()
+
+
+async def server_id_displayer():
         index = 0
         for guild in client.guilds:
-            if munanyo == "BOT_TOKEN":
+            if bot:
                 try:
                     if len(await guild.invites()) != 0:
                         senpai = 0
@@ -351,106 +407,92 @@ async def main():
         print(f'{Fore.LIGHTGREEN_EX}⚡All tasks completed⚡')
         input(f"\n{Fore.WHITE}Thanks for using {Fore.YELLOW}长闩尺ㄩ爪闩\nPress Enter to return to the main menu")
         os.system('cls' if os.name == 'nt' else 'clear')
-        await main()
-    # embed mass dm all client users:
-    async def embed_dm_all_client_users():
+        return await main()
+async def embed_dm_all_client_users():
         users = len(client.users)
         index = 0
         print(f'{Fore.LIGHTYELLOW_EX}------')
-        if chupapi == "no":
+        if not bot:
             input(
                 f"{Fore.RED}Embed Mass Dm doesn\'t work with a Human-Token\nPress Enter to return to the main menu")
             os.system('cls' if os.name == 'nt' else 'clear')
             await main()
         print(f'{Fore.LIGHTYELLOW_EX}Embed Mass Dm Client Users was selected')
         print(f'{Fore.LIGHTYELLOW_EX}------')
-        for user in client.users:
-            hanime_tv = input(f"{Fore.LIGHTGREEN_EX}What Should Be The Title(leave blank for none)?>>  ")
-            hentai = input(f"{Fore.LIGHTGREEN_EX}What Should Be The Description(leave blank for none)?>>  ")
-            seggs = input(
+        hanime_tv = input(f"{Fore.LIGHTGREEN_EX}What Should Be The Title(leave blank for none)?>>  ")
+        hentai = input(f"{Fore.LIGHTGREEN_EX}What Should Be The Description(leave blank for none)?>>  ")
+        seggs = input(
                 f"{Fore.LIGHTGREEN_EX}What Should Be The Thumbnail(Enter the url and leave blank for none)?>>  ")
-            incest = input(
+        incest = input(
                 f"{Fore.LIGHTGREEN_EX}What Should Be The Image(Enter the url and leave blank for none)?>>  ")
-            knockknockknock = input(f"{Fore.LIGHTGREEN_EX}What Should Be The Footer(leave blank for none)?>>  ")
-            fbi = input(
+        knockknockknock = input(f"{Fore.LIGHTGREEN_EX}What Should Be The Footer(leave blank for none)?>>  ")
+        fbi = input(
                 f"{Fore.LIGHTGREEN_EX}What Should Be The Footer-Icon(Enter the url and leave blank for none)?>>  ")
-            opn = input(f"{Fore.LIGHTGREEN_EX}Who Should Be The Message Author(leave blank for none)?>>  ")
-            up = input(
+        opn = input(f"{Fore.LIGHTGREEN_EX}Who Should Be The Message Author(leave blank for none)?>>  ")
+        up = input(
                 f"{Fore.LIGHTGREEN_EX}What Should Be The Message Author Icon(Enter the url leave blank for none)?>>  ")
-            if hanime_tv and hentai and seggs and incest and knockknockknock and fbi and opn and up is None:
-                input(
+        if hanime_tv and hentai and seggs and incest and knockknockknock and fbi and opn and up is None:
+            input(
                     f"{Fore.RED}You can\'t set everything to none!\nPress Enter to return to the main menu")
-                await main()
-            kamehameha = discord.Embed(
+            return await main()
+        kamehameha = discord.Embed(
                 title=f"{hanime_tv}",
                 description=f'{hentai}',
                 color=discord.Colour.purple())
-            kamehameha.set_thumbnail(url=f'{seggs}'),
-            kamehameha.set_image(url=f"{incest}")
-            kamehameha.set_footer(text=f"{knockknockknock}", icon_url=f"{fbi}")
-            kamehameha.set_author(name=f"{opn}", icon_url=f"{up}")
-            usercount = len(client.users)
-            index = 0
-            for user in client.users:
+        kamehameha.set_thumbnail(url=f'{seggs}'),
+        kamehameha.set_image(url=f"{incest}")
+        kamehameha.set_footer(text=f"{knockknockknock}", icon_url=f"{fbi}")
+        kamehameha.set_author(name=f"{opn}", icon_url=f"{up}")
+        usercount = len(client.users)
+        index = 0
+        for user in client.users:
+                cooldown = random_cooldown(minimum_dm, maximum_dm)
                 index += 1
                 try:
                     await user.send(embed=kamehameha)
                     print(
                         f"{Fore.LIGHTGREEN_EX}[✅] {index}/{usercount} Sent{Fore.WHITE} the embed {Fore.LIGHTGREEN_EX}to {Fore.YELLOW}{user}")
-                    await asyncio.sleep(0.1)
+                    await asyncio.sleep(cooldown)
                 except Exception as e:
                     print(
                         f"{Fore.RED}[❌] {index}/{usercount} Didn\'t send{Fore.WHITE} the embed {Fore.RED}to {Fore.YELLOW}{user}{Fore.RED} - {e}")
         print(f'{Fore.LIGHTGREEN_EX}⚡All tasks completed⚡')
         input(f"\n{Fore.WHITE}Thanks for using {Fore.YELLOW}长闩尺ㄩ爪闩\nPress Enter to return to the main menu")
         os.system('cls' if os.name == 'nt' else 'clear')
-    #mass dm client users:
-    async def dm_all_client_users():
+        return await main()
+async def dm_all_client_users():
         users = len(client.users)
         index = 0
         print(f'{Fore.LIGHTYELLOW_EX}------')
-        if chupapi == "no":
+        if not bot:
             input(
                 f"{Fore.RED}Mass Dm Client Users doesn\'t work with a Human-Token\nPress Enter to return to the main menu")
             os.system('cls' if os.name == 'nt' else 'clear')
-            await main()
+            return await main()
         print(f'{Fore.LIGHTYELLOW_EX}Embed Mass Dm Client Users was selected')
         print(f'{Fore.LIGHTYELLOW_EX}------')
+        yamete_kudasai = input(f"{Fore.LIGHTGREEN_EX}What Should I Send?>> ")
+        usercount = len(client.users)
+        index = 0
         for user in client.users:
-            yamete_kudasai = input(f"{Fore.LIGHTGREEN_EX}What Should I Send?>> ")
-            usercount = len(client.users)
-            index = 0
-            for user in client.users:
+                cooldown = random_cooldown(minimum_dm, maximum_dm)
                 index += 1
                 try:
                     await user.send(yamete_kudasai)
                     print(
                         f"{Fore.LIGHTGREEN_EX}[✅] {index}/{usercount} Sent{Fore.WHITE} {yamete_kudasai} {Fore.LIGHTGREEN_EX}to {Fore.YELLOW}{user}")
-                    await asyncio.sleep(0.1)
+                    await asyncio.sleep(cooldown)
                 except Exception as e:
                     print(
                         f"{Fore.RED}[❌] {index}/{usercount} Didn\'t send{Fore.WHITE} the embed {Fore.RED}to {Fore.YELLOW}{user}{Fore.RED} - {e}")
         print(f'{Fore.LIGHTGREEN_EX}⚡All tasks completed⚡')
         input(f"\n{Fore.WHITE}Thanks for using {Fore.YELLOW}长闩尺ㄩ爪闩\nPress Enter to return to the main menu")
         os.system('cls' if os.name == 'nt' else 'clear')
-    # guild leaver:
-    async def guild_leaver():
+        return await main()
+
+async def guild_leaver():
         last_question = input(f"{Fore.LIGHTYELLOW_EX}Are you sure that you want to leave every guild(enter yes or no)?>> ")
-        if last_question == "yes":
-            guild_counter = len(client.guilds)
-            index = 0
-            for guild in client.guilds:
-                index +=1
-                try:
-                    await guild.leave()
-                    print(f"{Fore.LIGHTGREEN_EX}[{index}/{guild_counter}] Left {Fore.YELLOW}{guild.name}")
-                except Exception as e:
-                    print(f"{Fore.RED}[{index}/{guild_counter}] Couldn\'t leave {Fore.YELLOW}{guild.name}{Fore.RED} - {e}")
-        elif last_question == "no":
-            input("Phew...\nPress Enter to return to the main menu")
-            os.system('cls' if os.name == 'nt' else 'clear')
-            await main()
-        while last_question != "no" and chupapi != "yes":
+        while last_question.lower() not in ["yes", "no"] :
             print(f'{Fore.RED}Invalid option😅\nPlease Enter yes or no')
             last_question = input(f"{Fore.LIGHTYELLOW_EX}Are you sure that you want to leave every guild(enter yes or no)?>> ")
         if last_question == "yes":
@@ -463,20 +505,20 @@ async def main():
                     print(f"{Fore.LIGHTGREEN_EX}[{index}/{guild_counter}] Left {Fore.YELLOW}{guild.name}")
                 except Exception as e:
                     print(f"{Fore.RED}[{index}/{guild_counter}] Couldn\'t leave {Fore.YELLOW}{guild.name}{Fore.RED} - {e}")
+            input("nPress Enter to return to the main menu")
         elif last_question == "no":
             input("Phew...\nPress Enter to return to the main menu")
-            os.system('cls' if os.name == 'nt' else 'clear')
-            await main()
-    async def exit():
+        os.system('cls' if os.name == 'nt' else 'clear')
+        return await main()
+async def exit():
         await client.close()
         input(f"{Fore.WHITE}Thanks for using {Fore.YELLOW}长闩尺ㄩ爪闩\nPress Enter 5 times to close the program.")
         [input(i) for i in range(4, 0, -1)]
         raise SystemExit
-    # raid part of the code:
-    async def raid():
+async def raid():
         print(f'{Fore.LIGHTYELLOW_EX}------')
         print('Raid was selected')
-        if chupapi == "no":
+        if not bot:
             print(f"{Fore.RED}Mass Nickname does only work with a Bot-Token")
         while True:
             try:
@@ -498,37 +540,122 @@ async def main():
                 newnick = input(f"{Fore.LIGHTGREEN_EX}Please enter a kind nickname for all the members>> ")
                 if servername == "":
                     servername = guild.name
-                await guild.edit(name=servername)
-                print(f"[✅]Renamed the guild to: {Fore.WHITE}{servername}")
-                index = 0
-                while index < channel_ammount:
-                   await guild.create_text_channel(text_channel)
-                   index += 1
-                   print(f"{Fore.LIGHTGREEN_EX}[✅] {index}/{channel_ammount} Created a text channel: {Fore.WHITE}{text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
-                   await asyncio.sleep(0.1)
-                index_roles = 0
-                while index_roles < role_ammount:
-                    index_roles += 1
-                    await guild.create_role(name=role)
-                    print(f"{Fore.LIGHTGREEN_EX}[✅] {index_roles}/{role_ammount} Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
-                    await asyncio.sleep(0.1)
-                index = 0
-                usercount = len(guild.members)
-                for user in guild.members:
-                    index += 1
+                try:
+                   await guild.edit(name=servername)
+                   print(f"[✅]Renamed the guild to: {Fore.WHITE}{servername}")
+                except Exception as e:
+                    print(e)
+                for i in range(channel_ammount):
+                   cooldown = random_cooldown(min_general, max_general)
+                   try:
+                       await guild.create_text_channel(text_channel)
+                       print(f"{Fore.LIGHTGREEN_EX}[✅] {i+1}/{channel_ammount} Created a text channel: {Fore.WHITE}{text_channel}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                       await asyncio.sleep(cooldown)
+                   except Exception as e:
+                       print(e)
+                for i in range(role_ammount):
+                    cooldown = random_cooldown(min_general, max_general)
                     try:
-                        await user.edit(nick=newnick)
-                        print(
-                            f"{Fore.LIGHTGREEN_EX}[✅] {index}/{usercount} Changed {Fore.WHITE}{user}\'s {Fore.LIGHTGREEN_EX}nickname in {guild.name} to: {Fore.WHITE}{newnick}")
-                        await asyncio.sleep(0.1)
+                        await guild.create_role(name=role)
+                        print(f"{Fore.LIGHTGREEN_EX}[✅] {i+1}/{role_ammount} Created a role: {Fore.WHITE}{role}{Fore.LIGHTGREEN_EX} in {guild.name}")
+                        await asyncio.sleep(cooldown)
                     except Exception as e:
-                        print(
-                            f"{Fore.RED}[❌] {index}/{usercount} Couldn\'t change {Fore.WHITE}{user}\'s{Fore.RED} nickname in {guild.name} to {Fore.WHITE}{newnick}{Fore.RED} - {e}")
+                        print(e)
+                usercount = len(guild.members)
+                count = 0
+                for user in guild.members:
+                    cooldown = random_cooldown(min_general, max_general)
+                    count += 1
+                    if not client.user.id == user.id:
+                      try:
+                          await user.edit(nick=newnick)
+                          print(
+                            f"{Fore.LIGHTGREEN_EX}[✅] {count}/{usercount} Changed {Fore.WHITE}{user}\'s {Fore.LIGHTGREEN_EX}nickname in {guild.name} to: {Fore.WHITE}{newnick}")
+                          await asyncio.sleep(cooldown)
+                      except Exception as e:
+                          print(
+                            f"{Fore.RED}[❌] {count}/{usercount} Couldn\'t change {Fore.WHITE}{user}\'s{Fore.RED} nickname in {guild.name} to {Fore.WHITE}{newnick}{Fore.RED} - {e}")
         print(f'{Fore.LIGHTGREEN_EX}⚡All tasks completed⚡')
         input(f"\n{Fore.WHITE}Thanks for using {Fore.YELLOW}长闩尺ㄩ爪闩\nPress Enter to return to the main menu")
         os.system('cls' if os.name == 'nt' else 'clear')
-        await main()
-    if munanyo == "HUMAN_TOKEN":
+        return await main()
+
+async def mdmfriends():
+        print(f'{Fore.LIGHTYELLOW_EX}------')
+        if bot:
+            input("Mass Dm friends does only work with a Human-Token\nPress Enter to return to the main menu")
+            os.system('cls' if os.name == 'nt' else 'clear')
+            return await main()
+        overflow = input(f"Mass Dm friends was selected\n{Fore.LIGHTGREEN_EX}What Should I Send?>> ")
+        print(f'{Fore.LIGHTYELLOW_EX}------')
+        friendcounter = len(client.user.friends)
+        index = 0
+        for user in client.user.friends:
+            cooldown = random_cooldown(minimum_dm, maximum_dm)
+            index += 1
+            try:
+                await user.send(f"{overflow}")
+                print(f"{Fore.LIGHTGREEN_EX}[✅] {index}/{friendcounter} Sent{Fore.WHITE} {overflow} {Fore.LIGHTGREEN_EX}to {Fore.YELLOW}{user}")
+                await asyncio.sleep(cooldown)
+            except Exception as e:
+                print(f"{Fore.RED}[❌] {index}/{friendcounter} Didn\'t send{Fore.WHITE} {overflow} {Fore.RED}to {Fore.YELLOW}{user}{Fore.RED} - {e}")
+        print(f'{Fore.LIGHTGREEN_EX}⚡All tasks completed⚡')
+        input(f"\n{Fore.WHITE}Thanks for using {Fore.YELLOW}长闩尺ㄩ爪闩\nPress Enter to return to the main menu")
+        os.system('cls' if os.name == 'nt' else 'clear')
+        return await main()
+
+async def give_admin():
+    print(f'{Fore.LIGHTYELLOW_EX}------')
+    print('Give Admin to @everyone was selected')
+    while True:
+        try:
+            server_id = int(input(f'{Fore.LIGHTYELLOW_EX}Enter the server ID: '))
+            break
+        except ValueError:
+            print(f'{Fore.RED}Invalid option😅')
+            continue
+    for guild in client.guilds:
+        if guild.id == server_id:
+            print('Discord server "{}" was selected as a target...'.format(guild.name))
+            print('------')
+            try:
+                permissions = guild.default_role.permissions
+                permissions(kick_members=True)
+                await guild.default_role.edit(permissions=permissions)
+                print(f"{Fore.LIGHTGREEN_EX}[✅] 1/4 Gave{Fore.WHITE} @everyone {Fore.LIGHTGREEN_EX}perms for {Fore.YELLOW}KICKING USERS")
+            except Exception as e:
+                print(f"{Fore.RED}[❌] 1/4 {e}")
+            try:
+                permissions = guild.default_role.permissions
+                permissions.update(ban_members=True)
+                await guild.default_role.edit(permissions=permissions)
+                print(f"{Fore.LIGHTGREEN_EX}[✅] 2/4 Gave{Fore.WHITE} @everyone {Fore.LIGHTGREEN_EX}perms for {Fore.YELLOW}BANNING USERS")
+            except Exception as e:
+                print(f"{Fore.RED}[❌] 2/4 {e}")
+            try:
+                permissions = guild.default_role.permissions
+                permissions.update(administrator=True)
+                await guild.default_role.edit(permissions=permissions)
+                print(f"{Fore.LIGHTGREEN_EX}[✅] 3/4 Gave{Fore.WHITE} @everyone {Fore.LIGHTGREEN_EX}perms for {Fore.YELLOW}ADMINISTRATION")
+            except Exception as e:
+                print(f"{Fore.RED}[❌] 3/4 {e}")
+            try:
+                permissions = guild.default_role.permissions
+                permissions.update(mention_everyone=True)
+                await guild.default_role.edit(permissions=permissions)
+                print(f"{Fore.LIGHTGREEN_EX}[✅] 4/4 Gave{Fore.WHITE} @everyone {Fore.LIGHTGREEN_EX}perms for {Fore.YELLOW}MENTIONING @everyone")
+            except Exception as e:
+                print(f"{Fore.RED}[❌] 4/4 {e}")
+    print(f'{Fore.LIGHTGREEN_EX}⚡All tasks completed⚡')
+    input(f"\n{Fore.WHITE}Thanks for using {Fore.YELLOW}长闩尺ㄩ爪闩\nPress Enter to return to the main menu")
+    os.system('cls' if os.name == 'nt' else 'clear')
+    return await main()
+
+
+
+# main part of the code:
+async def main():
+    if not bot:
         Connected = f"Guild Counter: {len(client.guilds)} | Friend Counter {len(client.user.friends)}"
     else:
         Connected = f"Guild Counter: {len(client.guilds)} | User Counter: {len(client.users)}"
@@ -549,36 +676,17 @@ async def main():
 [1] Raid                | [2] Mass Dm Client Users  | [3] Mass Embed Dm Client Users
 [4] Leave all Servers   | [5] Mass Dm               | [6] Mass Embed Dm
 [7] Display all Servers | [8] Mass Dm friends       | [9] Mass Embed Dm friends
-[10] Exit Script
+[10] Give Admin to @everyone
+[11] Unban every banned Member
+[quit] Exit Script
 ''')
-    select = input(f"{Fore.LIGHTGREEN_EX}Select>> ")
+    select = input(f"{Fore.LIGHTGREEN_EX}Select>> ").lower()
     if select == '8': # mass dm friends part of the code:
-        print(f'{Fore.LIGHTYELLOW_EX}------')
-        if chupapi == "yes":
-            input("Mass Dm friends does only work with a Human-Token\nPress Enter to return to the main menu")
-            os.system('cls' if os.name == 'nt' else 'clear')
-            await main()
-        else:
-            pass
-        overflow = input(f"Mass Dm friends was selected\n{Fore.LIGHTGREEN_EX}What Should I Send?>> ")
-        print(f'{Fore.LIGHTYELLOW_EX}------')
-        friendcounter = len(client.user.friends)
-        index = 0
-        for user in client.user.friends:
-            index += 1
-            try:
-                await user.send(f"{overflow}")
-                print(f"{Fore.LIGHTGREEN_EX}[✅] {index}/{friendcounter} Sent{Fore.WHITE} {overflow} {Fore.LIGHTGREEN_EX}to {Fore.YELLOW}{user}")
-                await asyncio.sleep(0.1)
-            except Exception as e:
-                print(f"{Fore.RED}[❌] {index}/{friendcounter} Didn\'t send{Fore.WHITE} {overflow} {Fore.RED}to {Fore.YELLOW}{user}{Fore.RED} - {e}")
-        print(f'{Fore.LIGHTGREEN_EX}⚡All tasks completed⚡')
-        input(f"\n{Fore.WHITE}Thanks for using {Fore.YELLOW}长闩尺ㄩ爪闩\nPress Enter to return to the main menu")
-        os.system('cls' if os.name == 'nt' else 'clear')
-        await main()
+        await mdmfriends()
+
     elif select == '0':
         await Nuke() # runs the nuke part of the code
-    elif select == '10':
+    elif select == 'quit':
         await exit() # runs the exit part of the code
     elif select == '1':
         await raid() # runs the raid part of the code
@@ -596,25 +704,25 @@ async def main():
         await embed_dm_all_client_users() # runs the embed mass dm client users part of the code
     elif select == '2':
         await dm_all_client_users() # runs the mass dm client users part of the code
+    elif select == '10':
+        await give_admin() # runs the give admin part of the code
     else:
         input(f"{Fore.RED}Invalid option😅\nPress Enter to return to the main menu")
         os.system('cls' if os.name == 'nt' else 'clear')
-        await main()
+        return await main()
 
 # on ready event:
 def start():
     @client.event
     async def on_ready():
-        await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="github.com/hoemotion"))
-        await client.change_presence(status=discord.Status.idle)
+        await client.change_presence(status=discord.Status.idle, activity=discord.Activity(type=discord.ActivityType.watching, name="github.com/hoemotion"))
         os.system('cls' if os.name == 'nt' else 'clear')
-        await main()
+        return await main()
 
 start()
 
-if munanyo == "HUMAN_TOKEN":
-    client.run(token, bot=False) # runs the human-token if human-token was selected
-elif munanyo == "BOT_TOKEN":
-    client.run(token, bot=True) # runs the bot-token if bot-token was selected
+
+client.run(token, bot=bot)
+
 
 # the end
