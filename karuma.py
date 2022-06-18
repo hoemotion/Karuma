@@ -1,45 +1,23 @@
-import time
+#!/usr/bin/python
+# -*- coding: UTF-8 -*-
 from os import system, name
-import sys, os, json, random
-sys.tracebacklimit = 0
-import subprocess
-try:
-    import discord
-except ImportError:
-    subprocess.check_call([sys.executable, "-m", "pip", "install", 'discord.py'])
-import discord
-from discord.ext import commands
-import json
-try:
-    import colorama
-except ImportError:
-    subprocess.check_call([sys.executable, "-m", "pip", "install", 'colorama'])
-from colorama import Fore, init, Style
+import sys, os, json, random, time, asyncio, pyfade, discord, subprocess
 from datetime import datetime
-import asyncio
-import time
-try:
-    import pyfade
-except ImportError:
-    subprocess.check_call([sys.executable, "-m", "pip", "install", 'pyfade'])
-    import pyfade
-# imports all the stuff you'll need
-init()
-#this is required for some windows users
-# enabling member intents:
+from discord.ext import commands
+from colorama import Fore, init, Style;init()
+
+sys.tracebacklimit = 0
 intents = discord.Intents().default()
 intents.members = True
 client = discord.Client(intents=intents)
-
-setup_json = open(f"./config.json", "r")
-setup = json.load(setup_json)
+setup = json.load(open(f"./config.json", "r"))
 minimum_dm, maximum_dm, bot, token, boot, disclaimer, min_ban, max_ban, min_general, max_general = setup["minimum_dm_delay"], setup["maximum_dm_delay"], setup["bot"], setup["token"], setup["skip_booting"], setup["skip_disclaimer"], setup["minimum_ban_delay"], setup["maximum_ban_delay"], setup["minimum_general_delay"], setup["maximum_general_delay"]
 
 def random_cooldown(minimum, maximum):
     cooldown = random.randint(minimum*100,maximum*100) / 100
     return cooldown
 
-# disclaimer:
+
 to_print_disclaimer = [f"{Fore.LIGHTWHITE_EX}{Style.BRIGHT}DISCLAIMER:",
                        f"{Style.RESET_ALL}{Fore.LIGHTWHITE_EX}User automation and spamming are {Fore.LIGHTYELLOW_EX}{Style.BRIGHT}against Discord's TOS!!{Style.RESET_ALL}{Fore.RESET}",
                        f"{Fore.LIGHTWHITE_EX}Use this tool only for educational purposes and at your own risk",
@@ -60,7 +38,6 @@ if not disclaimer:
         print(item)
         time.sleep(to_sleep[index])
 
-# poor booting animation:
 boot_anim = [f"{Style.BRIGHT}{Fore.LIGHTWHITE_EX}Booting {Fore.RED}长闩尺ㄩ爪闩 {Fore.RESET}{Fore.LIGHTWHITE_EX}Bot",
              f"{Fore.RED}25%",
              f"{Fore.YELLOW}50%",
@@ -652,8 +629,6 @@ async def give_admin():
     return await main()
 
 
-
-# main part of the code:
 async def main():
     if not bot:
         Connected = f"Guild Counter: {len(client.guilds)} | Friend Counter {len(client.user.friends)}"
@@ -681,37 +656,36 @@ async def main():
 [quit] Exit Script
 ''')
     select = input(f"{Fore.LIGHTGREEN_EX}Select>> ").lower()
-    if select == '8': # mass dm friends part of the code:
+    if select == '8':
         await mdmfriends()
 
     elif select == '0':
-        await Nuke() # runs the nuke part of the code
+        await Nuke()
     elif select == 'quit':
-        await exit() # runs the exit part of the code
+        await exit()
     elif select == '1':
-        await raid() # runs the raid part of the code
+        await raid() 
     elif select == '5':
-        await massdm() # runs the mass dm part of the code
+        await massdm()
     elif select == '6':
-        await embedmassdm() # runs the embed mass dm part of the code
+        await embedmassdm()
     elif select == '9':
-        await embedmassdmfriends() # runs the embed mass dm friends part of the code
+        await embedmassdmfriends()
     elif select == '7':
-        await server_id_displayer() # runs the embed mass dm part of the code
+        await server_id_displayer()
     elif select == '4':
-        await guild_leaver() # runs the guild-leaver part of the code
+        await guild_leaver()
     elif select == '3':
-        await embed_dm_all_client_users() # runs the embed mass dm client users part of the code
+        await embed_dm_all_client_users()
     elif select == '2':
-        await dm_all_client_users() # runs the mass dm client users part of the code
+        await dm_all_client_users()
     elif select == '10':
-        await give_admin() # runs the give admin part of the code
+        await give_admin()
     else:
         input(f"{Fore.RED}Invalid option😅\nPress Enter to return to the main menu")
         os.system('cls' if os.name == 'nt' else 'clear')
         return await main()
 
-# on ready event:
 def start():
     @client.event
     async def on_ready():
@@ -719,10 +693,6 @@ def start():
         os.system('cls' if os.name == 'nt' else 'clear')
         return await main()
 
+
 start()
-
-
 client.run(token, bot=bot)
-
-
-# the end
