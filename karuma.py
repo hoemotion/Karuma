@@ -17,7 +17,7 @@ setup = json.load(open(f"./config.json", "r"))
 minimum_dm, maximum_dm, bot, token, boot, disclaimer, min_ban, max_ban, min_general, max_general = setup["minimum_dm_delay"], setup["maximum_dm_delay"], setup["bot"], setup["token"], setup["skip_booting"], setup["skip_disclaimer"], setup["minimum_ban_delay"], setup["maximum_ban_delay"], setup["minimum_general_delay"], setup["maximum_general_delay"]
 
 def random_cooldown(minimum, maximum):
-    cooldown = random.randint(minimum*100,maximum*100) / 100
+    cooldown = random.randint(minimum*100000,maximum*100000) / 100000
     return cooldown
 
 
