@@ -698,4 +698,10 @@ def start():
 
 
 start()
-client.run(token, bot=bot)
+try:
+    client.run(token, bot=bot)
+except Exception as e:
+    if "improper token" in str(e).lower():
+        print("THe discord token is incorrect please edit config.json and try again")
+    else:
+        print(e)
