@@ -1,11 +1,11 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 try:
-from os import system, name
-import sys, os, json, random, time, asyncio, pyfade, discord, subprocess
-from datetime import datetime
-from discord.ext import commands
-from colorama import Fore, init, Style;init()
+    from os import system, name
+    import sys, os, json, random, time, asyncio, pyfade, discord, subprocess
+    from datetime import datetime
+    from discord.ext import commands
+    from colorama import Fore, init, Style;init()
 except ImportError:
     subprocess.check_call([sys.executable, "-m", "pip", "install", '-r' , 'requirements.txt'])
 
