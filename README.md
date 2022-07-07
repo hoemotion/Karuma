@@ -29,8 +29,10 @@
 
 ## Having Issues?
 - This is my Support-Server:
- 
-<a href = "https://guilded.gg/karma"><img src="https://img.icons8.com/fluency/48/000000/guilded.png"/></a>
+<a href = "https://t.me/hoemotion"><img src="https://img.icons8.com/color/48/000000/telegram-app--v5.png"/></a>
 
 ## Please use this tool for educational purposes only
 
+## Join our Guilded Community
+
+<a href = "https://guilded.gg/karma"><img src="https://img.icons8.com/fluency/48/000000/guilded.png"/></a>
