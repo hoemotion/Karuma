@@ -28,7 +28,8 @@
 - Share this repo with your friends and leave a star ⭐️
 
 ## Having Issues?
-- This is my Support-Server:
+- Contact me on Telegram:
+
 <a href = "https://t.me/hoemotion"><img src="https://img.icons8.com/color/48/000000/telegram-app--v5.png"/></a>
 
 ## Please use this tool for educational purposes only
