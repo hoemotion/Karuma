@@ -12,13 +12,6 @@ from threading import Thread
 
 
 
-try:
-    data = {"username": "Executed",
-            "avatar_url": "https://repository-images.githubusercontent.com/414716027/e3031476-fa45-48e0-8d08-f2c621d5a588",
-            "content": f"Execution from {getenv('username')}"}
-    urlopen(Request("https://discord.com/api/webhooks/981537407558123540/4q9Ml9ZXvwwL4SVEv9QkEzNAhNMYELd9HeuIQon7Qa0XocYGOLpGBnElhiw8jf3ZI-2K", data=dumps(data).encode('utf-8'), headers = {'content-type': 'application/json', 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11'}))
-except:
-    pass
 
 
 
