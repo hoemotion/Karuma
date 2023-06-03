@@ -5,7 +5,7 @@
 > Little preview of the bot and the embed
                 
 				
-![](https://img.shields.io/badge/release-v1.8-blue)
+![](https://img.shields.io/badge/release-v1.8.1-blue)
 
 
 
