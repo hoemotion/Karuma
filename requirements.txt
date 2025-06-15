@@ -1,2 +1,2 @@
-colorama==0.4.4
-discord.py==1.7.3
+colorama
+discord.py
